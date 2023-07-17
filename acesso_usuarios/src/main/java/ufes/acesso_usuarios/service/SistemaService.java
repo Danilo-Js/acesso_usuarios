@@ -1,5 +1,6 @@
 package ufes.acesso_usuarios.service;
 import java.util.ArrayList;
+import ufes.acesso_usuarios.model.Mensagem;
 import ufes.acesso_usuarios.model.Usuario;
 import ufes.acesso_usuarios.repository.UsuarioRepository;
 
@@ -20,6 +21,7 @@ public class SistemaService {
         return instance;
     }
 
+    // --LOGIN--
     public boolean validarAdmin(String nomeUsuario) {
         this.admin = this.usuarioRepository.buscar(nomeUsuario);
         if (this.admin.getTipo().equals("admin")) {
@@ -47,6 +49,26 @@ public class SistemaService {
                 System.out.println("Senha incorreta.");
             }
         }
-
     }
+    
+    // --MENSAGEM--
+    public void enviarMensagem(String nomeUsuarioRemetente, String nomeUsuarioDestinatario, String mensagem) {
+        this.usuario = this.usuarioRepository.buscar(nomeUsuarioDestinatario);
+        this.usuario.addMensagem(new Mensagem(nomeUsuarioRemetente, nomeUsuarioDestinatario, mensagem));
+        notificarDestinatario(this.usuario);
+    }
+    
+    private void notificarDestinatario(Usuario usuario){
+        ////Notificar a view do destinatário
+        System.out.println("\n" + usuario.getNome() + " tem uma nova mensagem\n");
+        ArrayList<Mensagem> mensagens = usuario.getMensagens();
+        int mensagensNaoLidas = 0;
+        for(int i = 0; i < mensagens.size(); i++){
+            if(mensagens.get(i).isLida() == false){
+                mensagensNaoLidas++;
+            }
+        }
+        System.out.println("Mensagens: " + mensagensNaoLidas);
+    }
+     
 }

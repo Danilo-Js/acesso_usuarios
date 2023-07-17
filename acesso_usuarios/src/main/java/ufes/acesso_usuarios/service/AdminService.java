@@ -1,6 +1,5 @@
 package ufes.acesso_usuarios.service;
 import ufes.acesso_usuarios.model.Usuario;
-import ufes.acesso_usuarios.repository.UsuarioRepository;
 
 public class AdminService {
     private SistemaService sistemaService;
@@ -18,6 +17,10 @@ public class AdminService {
         else{
             System.out.println("Usuário sem permissão.");
         }
+    }
+    
+    public void enviarMensagem(String nomeDestinatario, String mensagem) {
+        this.sistemaService.enviarMensagem(this.admin.getNome(), nomeDestinatario, mensagem);
     }
 
 }

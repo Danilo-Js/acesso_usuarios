@@ -1,4 +1,5 @@
 package ufes.acesso_usuarios.model;
+import java.util.ArrayList;
 
 public class Usuario {
     private String nome;
@@ -6,11 +7,13 @@ public class Usuario {
     private String senha;
     private String tipo;
     private boolean autorizacao;
-
+    private ArrayList<Mensagem> mensagens;
+    
     public Usuario(String nome, String nomeUsuario, String senha) {
         this.nome = nome;
         this.nomeUsuario = nomeUsuario;
         this.senha = senha;
+        this.mensagens = new ArrayList();
     }
 
     public String getNome() {
@@ -51,6 +54,14 @@ public class Usuario {
 
     public void setAutorizacao(boolean autorizacao) {
         this.autorizacao = autorizacao;
+    }
+
+    public ArrayList<Mensagem> getMensagens() {
+        return mensagens;
+    }
+
+    public void addMensagem(Mensagem mensagem) {
+        this.mensagens.add(mensagem);
     }
     
 }
