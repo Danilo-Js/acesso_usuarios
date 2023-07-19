@@ -30,7 +30,7 @@ public class Acesso_usuarios {
         System.out.println("Tipo: " + usuario.getTipo());
         
         // --MENSAGEM--
-        adminService.enviarMensagem("joyce.f.furtunato", "Te amo, minha querida <3!");
+        adminService.enviarNotificacao("joyce.f.furtunato", "Te amo, minha querida <3!");
         
         usuarioService.visualizarMensagem("joyce.f.furtunato");
         usuarioService.visualizarMensagem("joyce.f.furtunato");

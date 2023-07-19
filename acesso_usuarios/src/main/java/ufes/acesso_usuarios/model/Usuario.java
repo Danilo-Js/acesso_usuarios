@@ -1,13 +1,18 @@
 package ufes.acesso_usuarios.model;
+
+import ufes.acesso_usuarios.state.UsuarioCriado;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import ufes.acesso_usuarios.state.UsuarioState;
 
 public class Usuario {
+
     private String nome;
     private String senha;
     private LocalDate dataCadastro;
     private boolean autorizado;
     private ArrayList<Notificacao> notificacoes;
+    private UsuarioState estado;
 
     public Usuario(String nome, String senha) {
         this.nome = nome;
@@ -15,6 +20,11 @@ public class Usuario {
         this.dataCadastro = LocalDate.now();
         this.autorizado = false;
         this.notificacoes = new ArrayList<>();
+        this.estado = new UsuarioCriado();
+    }
+
+    public void setEstado(UsuarioState estado) {
+        this.estado = estado;
     }
 
     public void addNotificacao(Notificacao notificacao) {
@@ -26,7 +36,7 @@ public class Usuario {
             notificacao.setLida(true);
         }
     }
-    
+
     public int getQtdNotificacoesRecebidas() {
         return notificacoes.size();
     }
@@ -40,11 +50,11 @@ public class Usuario {
         }
         return cont;
     }
-    
-    public void alterarSenha(){
-        
+
+    public void alterarSenha() {
+
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -60,7 +70,7 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-    
+
     public LocalDate getDataCadastro() {
         return dataCadastro;
     }
@@ -75,5 +85,5 @@ public class Usuario {
 
     public ArrayList<Notificacao> getNotificacoes() {
         return notificacoes;
-    }  
+    }
 }

@@ -1,53 +1,52 @@
 package ufes.acesso_usuarios.model;
 import java.util.ArrayList;
-import ufes.acesso_usuarios.log.LogService;
 import ufes.acesso_usuarios.repository.UsuarioRepository;
+import ufes.acesso_usuarios.service.AdminService;
 import ufes.acesso_usuarios.service.NotificacaoService;
+import ufes.acesso_usuarios.state.UsuarioState;
 
 public class Administrador extends Usuario{
     private ArrayList<Usuario> usuariosCadastrados;
     private UsuarioRepository usuarioRepository;
-    private LogService logService;
+    private AdminService adminService;
+    private UsuarioState estado;
     private NotificacaoService notificacaoService;
 
-     public Administrador(String nome, String senha) {
+    public Administrador(ArrayList<Usuario> usuariosCadastrados, UsuarioRepository usuarioRepository, AdminService adminService, UsuarioState estado, NotificacaoService notificacaoService, String nome, String senha) {
         super(nome, senha);
-        this.usuariosCadastrados = new ArrayList<>();
+        this.usuariosCadastrados = usuariosCadastrados;
         this.usuarioRepository.getInstance();
-        this.logService = new LogService();
-        this.notificacaoService = new NotificacaoService();
+        this.adminService = adminService;
+        this.estado = estado;
+        this.notificacaoService = notificacaoService;
     }
-
+     
     public void cadastrarUsuario(String nome, String senha) {
-        Usuario novoUsuario = new Usuario(nome, senha);
-        usuarioRepository.addUsuario(novoUsuario);
-        logService.registrarLog("Inclusão de usuário", nome);
+        estado.criarUsuario(nome, senha);
     }
     
-    public void editarUsuario(String nome, String novoNome, String novaSenha){
-        Usuario usuario = usuarioRepository.buscar(nome);
-        usuario.setNome(novoNome);
-        usuario.setSenha(novaSenha);
+    public void buscarUsuario(String nome){
+        estado.visualizarUsuario(nome);
+    }
+    
+    public void atualizarNome(String nome, String novoNome){
+        estado.atualizarNome(nome, novoNome);
+    }
+    
+    public void atualizarSenha(String nome, String novaSenha){
+        estado.atualizarSenha(nome, novaSenha);
     }
     
     public void removerUsuario(String nome){
-        Usuario usuario = usuarioRepository.buscar(nome);
-        usuarioRepository.removerUsuario(usuario);
+        estado.deletarUsuario(nome);
     }
 
     public void autorizarAcesso(String nome) {
-        Usuario usuario = usuarioRepository.buscar(nome);
-        if (usuario != null) {
-            usuario.setAutorizado(true);
-            logService.registrarLog("Autorização de usuário", nome);
-        } else {
-            logService.registrarLogFalha("Autorização de usuário", "Usuário não encontrado: " + nome);
-        }
+        adminService.autorizarUsuario(nome);
     }
 
     public void enviarNotificacao(String remetente, ArrayList<String> destinatarios, String texto) {
-        notificacaoService.enviarNotificacao(remetente, destinatarios, texto);
-        logService.registrarLog("Envio no envio da notificação", "Remetente: " + remetente + ", Destinatários: " + destinatarios);
+        adminService.enviarNotificacao(remetente, destinatarios, texto);
     }
 
     public ArrayList<Usuario> getUsuariosCadastrados() {
