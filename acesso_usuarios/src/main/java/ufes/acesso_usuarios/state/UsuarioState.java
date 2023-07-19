@@ -1,4 +1,6 @@
 package ufes.acesso_usuarios.state;
+import ufes.acesso_usuarios.command.Command;
+import ufes.acesso_usuarios.command.VisualizarUsuarioCommand;
 import ufes.acesso_usuarios.service.AdminService;
 
 public abstract class UsuarioState {
@@ -9,11 +11,15 @@ public abstract class UsuarioState {
     }
 
     public void visualizarUsuario(String nome) {
-        adminService.buscarUsuario(nome);
+        Command command = new VisualizarUsuarioCommand(adminService, nome);
+        command.execute();
     }
 
     public abstract void criarUsuario(String nome, String senha);
+
     public abstract void atualizarNome(String nome, String novoNome);
+
     public abstract void atualizarSenha(String nome, String novaSenha);
+
     public abstract void deletarUsuario(String nome);
 }

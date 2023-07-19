@@ -1,18 +1,18 @@
 package ufes.acesso_usuarios.model;
-
-import ufes.acesso_usuarios.state.UsuarioCriado;
+import ufes.acesso_usuarios.state.UsuarioState;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import ufes.acesso_usuarios.state.UsuarioState;
+import ufes.acesso_usuarios.service.UsuarioService;
 
 public class Usuario {
-
     private String nome;
     private String senha;
     private LocalDate dataCadastro;
     private boolean autorizado;
     private ArrayList<Notificacao> notificacoes;
-    private UsuarioState estado;
+    private String tipo;
+    protected UsuarioState estado;
+    private UsuarioService usuarioService;
 
     public Usuario(String nome, String senha) {
         this.nome = nome;
@@ -20,21 +20,21 @@ public class Usuario {
         this.dataCadastro = LocalDate.now();
         this.autorizado = false;
         this.notificacoes = new ArrayList<>();
-        this.estado = new UsuarioCriado();
-    }
-
-    public void setEstado(UsuarioState estado) {
-        this.estado = estado;
+        this.estado = null; // Estado inicial é nulo
     }
 
     public void addNotificacao(Notificacao notificacao) {
         notificacoes.add(notificacao);
+        //Salva as alterações
+        usuarioService.atualizarUsuario(this);
     }
 
     public void marcarNotificacoesComoLidas() {
         for (Notificacao notificacao : notificacoes) {
             notificacao.setLida(true);
         }
+        //Salva as alterações
+        usuarioService.atualizarUsuario(this);
     }
 
     public int getQtdNotificacoesRecebidas() {
@@ -51,8 +51,10 @@ public class Usuario {
         return cont;
     }
 
-    public void alterarSenha() {
-
+    public void alterarSenha(String senha) {
+        this.senha = senha;
+        //Salva as alterações
+        usuarioService.atualizarUsuario(this);
     }
 
     public String getNome() {
@@ -86,4 +88,26 @@ public class Usuario {
     public ArrayList<Notificacao> getNotificacoes() {
         return notificacoes;
     }
+
+    public void setEstado(UsuarioState estado) {
+        this.estado = estado;
+    }
+    
+    public UsuarioState getEstado() {
+        return estado;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "nome=" + nome + ", senha=" + senha + ", dataCadastro=" + dataCadastro + ", autorizado=" + autorizado + ", notificacoes=" + notificacoes + ", tipo=" + tipo + ", estado=" + estado + ", usuarioService=" + usuarioService + '}';
+    }
+    
 }

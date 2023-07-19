@@ -2,6 +2,7 @@ package ufes.acesso_usuarios.service;
 import java.util.ArrayList;
 import ufes.acesso_usuarios.model.Usuario;
 import ufes.acesso_usuarios.repository.UsuarioRepository;
+import ufes.acesso_usuarios.state.VisualizacaoState;
 
 public class AdminService {
     private SistemaService sistemaService;
@@ -11,14 +12,17 @@ public class AdminService {
 
     public AdminService(Usuario admin) {
         this.sistemaService = SistemaService.getInstance();
-        this.usuarioRepository.getInstance();
+        this.usuarioRepository = UsuarioRepository.getInstance();
         this.notificacaoService = new NotificacaoService();
         this.admin = admin;
     }
     
     public void autorizarUsuario(String nome){
-        if(this.sistemaService.validarAdmin(this.admin.getNome())){
+        //if(this.sistemaService.validarAdmin(this.admin.getNome())){
+        if(this.sistemaService.validarAdmin(usuarioRepository.getUsuarios().get(0).getNome())){
             Usuario usuario = usuarioRepository.buscar(nome);
+            //Altera o estado para Visuzalização
+            usuario.setEstado(new VisualizacaoState(this));
             this.sistemaService.addUsuarioAutorizado(usuario, "comum");
         }
         else{
@@ -26,8 +30,8 @@ public class AdminService {
         }
     }
     
-    public void enviarNotificacao(String remetente, ArrayList<String> destinatarios, String texto) {
-        notificacaoService.enviarNotificacao(remetente, destinatarios, texto);
+    public void enviarNotificacao(ArrayList<String> destinatarios, String texto) {
+        notificacaoService.enviarNotificacao(admin.getNome(), destinatarios, texto);
     }
     
     //CRUD

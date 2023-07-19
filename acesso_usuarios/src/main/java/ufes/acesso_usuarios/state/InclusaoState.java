@@ -3,6 +3,7 @@ import ufes.acesso_usuarios.service.AdminService;
 import ufes.acesso_usuarios.command.*;
 
 public class InclusaoState extends UsuarioState {
+    
     public InclusaoState(AdminService adminService) {
         super(adminService);
     }

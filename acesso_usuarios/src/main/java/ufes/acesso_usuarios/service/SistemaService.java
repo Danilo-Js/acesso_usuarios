@@ -1,6 +1,4 @@
 package ufes.acesso_usuarios.service;
-import java.util.ArrayList;
-import ufes.acesso_usuarios.model.Mensagem;
 import ufes.acesso_usuarios.model.Usuario;
 import ufes.acesso_usuarios.repository.UsuarioRepository;
 
@@ -10,7 +8,7 @@ public class SistemaService {
     private Usuario admin;
     private Usuario usuario;
 
-    private SistemaService() {
+    public SistemaService() {
         this.usuarioRepository = UsuarioRepository.getInstance();
     }
 
@@ -41,7 +39,7 @@ public class SistemaService {
         if (this.usuario == null) {
             System.out.println("O usuário não existe.");
         } 
-        else if (this.usuario.isAutorizacao()) {
+        else if (this.usuario.isAutorizado()) {
             if(this.usuario.getSenha().equals(senha)){
                 System.out.println("Usuário logado.");
             }
@@ -51,24 +49,5 @@ public class SistemaService {
         }
     }
     
-    // --MENSAGEM--
-    public void enviarMensagem(String nomeUsuarioRemetente, String nomeUsuarioDestinatario, String mensagem) {
-        this.usuario = this.usuarioRepository.buscar(nomeUsuarioDestinatario);
-        this.usuario.addMensagem(new Mensagem(nomeUsuarioRemetente, nomeUsuarioDestinatario, mensagem));
-        notificarDestinatario(this.usuario);
-    }
-    
-    private void notificarDestinatario(Usuario usuario){
-        ////Notificar a view do destinatário
-        System.out.println("\n" + usuario.getNome() + " tem uma nova mensagem\n");
-        ArrayList<Mensagem> mensagens = usuario.getMensagens();
-        int mensagensNaoLidas = 0;
-        for(int i = 0; i < mensagens.size(); i++){
-            if(mensagens.get(i).isLida() == false){
-                mensagensNaoLidas++;
-            }
-        }
-        System.out.println("Mensagens: " + mensagensNaoLidas);
-    }
      
 }
