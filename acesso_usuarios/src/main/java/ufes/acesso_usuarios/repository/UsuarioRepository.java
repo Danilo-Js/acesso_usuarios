@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import ufes.acesso_usuarios.model.Usuario;
 
 public class UsuarioRepository {
-
     private static UsuarioRepository instance;
     private ArrayList<Usuario> usuarios;
 
@@ -22,13 +21,13 @@ public class UsuarioRepository {
         this.usuarios.add(usuario);
     }
 
-    public ArrayList<Usuario> getUsuarios() {
-        return usuarios;
+    public void removerUsuario(Usuario usuario){
+        this.usuarios.remove(usuario);
     }
 
     public Usuario buscar(String nomeUsuario) {
         for (Usuario usuario : usuarios) {
-            if (usuario.getNomeUsuario().equals(nomeUsuario)) {
+            if (usuario.getNome().equals(nomeUsuario)) {
                 return usuario;
             }
         }
@@ -44,5 +43,9 @@ public class UsuarioRepository {
             }
         }
         System.out.println("Usuário não encontrado.");
+    }
+    
+    public ArrayList<Usuario> getUsuarios() {
+        return usuarios;
     }
 }

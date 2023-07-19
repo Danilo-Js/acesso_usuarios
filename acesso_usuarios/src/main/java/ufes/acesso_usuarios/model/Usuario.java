@@ -1,35 +1,56 @@
 package ufes.acesso_usuarios.model;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Usuario {
     private String nome;
-    private String nomeUsuario;
     private String senha;
-    private String tipo;
-    private boolean autorizacao;
-    private ArrayList<Mensagem> mensagens;
-    
-    public Usuario(String nome, String nomeUsuario, String senha) {
+    private LocalDate dataCadastro;
+    private boolean autorizado;
+    private ArrayList<Notificacao> notificacoes;
+
+    public Usuario(String nome, String senha) {
         this.nome = nome;
-        this.nomeUsuario = nomeUsuario;
         this.senha = senha;
-        this.mensagens = new ArrayList();
+        this.dataCadastro = LocalDate.now();
+        this.autorizado = false;
+        this.notificacoes = new ArrayList<>();
     }
 
+    public void addNotificacao(Notificacao notificacao) {
+        notificacoes.add(notificacao);
+    }
+
+    public void marcarNotificacoesComoLidas() {
+        for (Notificacao notificacao : notificacoes) {
+            notificacao.setLida(true);
+        }
+    }
+    
+    public int getQtdNotificacoesRecebidas() {
+        return notificacoes.size();
+    }
+
+    public int getQtdNotificacoesLidas() {
+        int cont = 0;
+        for (Notificacao notificacao : notificacoes) {
+            if (notificacao.isLida()) {
+                cont++;
+            }
+        }
+        return cont;
+    }
+    
+    public void alterarSenha(){
+        
+    }
+    
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String usuario) {
-        this.nomeUsuario = usuario;
     }
 
     public String getSenha() {
@@ -39,29 +60,20 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public boolean isAutorizacao() {
-        return autorizacao;
-    }
-
-    public void setAutorizacao(boolean autorizacao) {
-        this.autorizacao = autorizacao;
-    }
-
-    public ArrayList<Mensagem> getMensagens() {
-        return mensagens;
-    }
-
-    public void addMensagem(Mensagem mensagem) {
-        this.mensagens.add(mensagem);
-    }
     
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public boolean isAutorizado() {
+        return autorizado;
+    }
+
+    public void setAutorizado(boolean autorizado) {
+        this.autorizado = autorizado;
+    }
+
+    public ArrayList<Notificacao> getNotificacoes() {
+        return notificacoes;
+    }  
 }
