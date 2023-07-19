@@ -32,7 +32,6 @@ public class Acesso_usuarios {
         usuarioService.acessarSistema(usuario.getNome(), usuario.getSenha());
         System.out.println("Tipo: " + usuario.getTipo());
         
-        
         admin.atualizarNome("joyce.f.furtunato", "joyceBarbosa");
         System.out.println(usuario.toString());
         
