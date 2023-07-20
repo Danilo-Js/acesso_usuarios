@@ -5,7 +5,7 @@ import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
 public class VisualizacaoState extends UsuarioState {
     
     public VisualizacaoState(TelaManterUsuarioPresenter presenterTelaUsuarioPresenter, String nomeUsuario) {
-        super(presenterTelaUsuarioPresenter);
+        super(presenterTelaUsuarioPresenter, nomeUsuario);
         this.nomeUsuario = nomeUsuario;
     }
 

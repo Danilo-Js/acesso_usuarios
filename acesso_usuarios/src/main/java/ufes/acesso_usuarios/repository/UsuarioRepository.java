@@ -46,7 +46,7 @@ public class UsuarioRepository {
         for (int i = 0; i < usuarios.size(); i++) {
             if (usuarios.get(i).equals(usuario)) {
                 usuarios.set(i, usuario);
-                System.out.println("Usuário atualizado.");
+                System.out.println("(Presenter) Usuário atualizado.");
                 return;
             }
         }

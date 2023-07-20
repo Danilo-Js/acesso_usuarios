@@ -6,7 +6,7 @@ public abstract class UsuarioState {
     protected TelaManterUsuarioPresenter presenterTelaManterUsuario;
     protected String nomeUsuario;
     
-    public UsuarioState(TelaManterUsuarioPresenter presenterTelaManterUsuario) {
+    public UsuarioState(TelaManterUsuarioPresenter presenterTelaManterUsuario, String nomeUsuario) {
         this.presenterTelaManterUsuario = presenterTelaManterUsuario;
     }
 

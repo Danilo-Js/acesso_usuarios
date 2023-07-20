@@ -10,7 +10,7 @@ public class TelaLoginPresenter {
     private TelaLoginView telaLogin;
     private TelaPrincipalAdminPresenter presenterTelaPrincipalAdmin;
     private TelaPrincipalUsuarioPresenter presenterTelaPrincipalUsuario;
-    private TelaManterUsuarioPresenter presenterTelaManterUsuario;
+    protected TelaManterUsuarioPresenter presenterTelaManterUsuario;
 
     public TelaLoginPresenter() {
         this.telaLogin = new TelaLoginView();
@@ -52,7 +52,7 @@ public class TelaLoginPresenter {
         this.telaLogin.getBtnCriarConta().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                presenterTelaManterUsuario = new TelaManterUsuarioPresenter(null, "criarConta");
+                presenterTelaManterUsuario = new TelaManterUsuarioPresenter(null, "criarUsuario");
             }
         });
     }

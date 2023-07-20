@@ -2,6 +2,7 @@ package ufes.acesso_usuarios;
 import java.util.ArrayList;
 import ufes.acesso_usuarios.model.Administrador;
 import ufes.acesso_usuarios.model.Usuario;
+import ufes.acesso_usuarios.presenter.TelaFormatoLogPresenter;
 import ufes.acesso_usuarios.presenter.TelaLoginPresenter;
 import ufes.acesso_usuarios.service.UsuarioService;
 
@@ -47,7 +48,7 @@ public class Acesso_usuarios {
 //        // Visualização da notificação pelo usuário
 //        usuarioService.visualizarNotificacao(usuario.getUsuario());
 //        usuarioService.visualizarNotificacao(usuario.getUsuario());
-
-        TelaLoginPresenter telaLogin = new TelaLoginPresenter();
+        new TelaFormatoLogPresenter();
+        //TelaLoginPresenter telaLogin = new TelaLoginPresenter();
     }
 }

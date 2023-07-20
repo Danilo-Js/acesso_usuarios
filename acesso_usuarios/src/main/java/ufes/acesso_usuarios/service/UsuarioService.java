@@ -1,5 +1,6 @@
 package ufes.acesso_usuarios.service;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import ufes.acesso_usuarios.model.Notificacao;
 import ufes.acesso_usuarios.model.Usuario;
 import ufes.acesso_usuarios.repository.UsuarioRepository;
@@ -24,6 +25,15 @@ public class UsuarioService {
     }
 
     public void criarUsuario(Usuario usuario) {
+        this.usuarios = usuarioRepository.getUsuarios();
+        if(this.usuarios.size() == 0){
+            usuario.setAutorizado(true);
+            usuario.setTipo("admin");
+        }
+        else{
+            usuario.setTipo("comum");
+            
+        }
         this.usuarioRepository.addUsuario(usuario);
     }
     
@@ -43,6 +53,7 @@ public class UsuarioService {
     
     public void atualizarUsuario(Usuario usuario){
         usuarioRepository.atualizarUsuario(usuario);
+        System.out.println("(Service) Usuário atualizado: " + usuario.toString());
     }
 
     public void abrirNotificacoes(String nomeDestinatario) {

@@ -5,7 +5,7 @@ import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
 public class InclusaoState extends UsuarioState {
 
     public InclusaoState(TelaManterUsuarioPresenter presenterTelaManterUsuario) {
-        super(presenterTelaManterUsuario);
+        super(presenterTelaManterUsuario, null);
     }
 
     @Override

@@ -4,28 +4,30 @@ import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
 import ufes.acesso_usuarios.state.VisualizacaoState;
 
 public class AtualizarUsuarioCommand extends ManterUsuarioCommand {
-
+    //private TelaManterUsuarioPresenter telaManterUsuarioPresenter;
+    
     public AtualizarUsuarioCommand(TelaManterUsuarioPresenter presenterTelaUsuarioPresenter, String nomeUsuario) {
         super(presenterTelaUsuarioPresenter);
         this.nomeUsuario = nomeUsuario;
+        //this.telaManterUsuarioPresenter = new TelaManterUsuarioPresenter(usuario);
     }
 
     @Override
     public void execute() {
-        //Preencher dados do usuário na view
-        presenterManterUsuario.validarOpcao("editarUsuario");
         
-        Usuario usuarioEditado = adminService.buscarUsuario(nomeUsuario);
+        Usuario usuarioEditado = usuarioService.buscarUsuario("gabriel");
+        System.out.println("Editado: " + usuarioEditado);
         
         String novoNome = presenterManterUsuario.getTelaManterUsuario().getInputNome().getText();
         String novoNomeUsuario = presenterManterUsuario.getTelaManterUsuario().getInputUsuario().getText();
         String novaSenha = presenterManterUsuario.getTelaManterUsuario().getInputSenha().getText();
+        System.out.println("Nova senha: " + novaSenha);
         
         usuarioEditado.setNome(novoNome);
         usuarioEditado.setUsuario(novoNomeUsuario);
         usuarioEditado.setSenha(novaSenha);
         
-        adminService.atualizarUsuario(usuarioEditado);
+        usuarioService.atualizarUsuario(usuarioEditado);
         presenterManterUsuario.alterarEstado(new VisualizacaoState(presenterManterUsuario, novoNome));
     }
 

@@ -5,8 +5,9 @@ import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
 
 public class EdicaoState extends UsuarioState {
 
-    public EdicaoState(TelaManterUsuarioPresenter presenterTelaManterUsuario) {
-        super(presenterTelaManterUsuario);
+    public EdicaoState(TelaManterUsuarioPresenter presenterTelaManterUsuario, String nomeUsuario) {
+        super(presenterTelaManterUsuario, nomeUsuario);
+        this.nomeUsuario = nomeUsuario;
     }
 
     @Override

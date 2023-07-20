@@ -15,9 +15,9 @@ public abstract class ManterUsuarioCommand implements ICommand{
     protected String senha;
     protected Usuario usuario;
 
-    public ManterUsuarioCommand(TelaManterUsuarioPresenter presenterTelaUsuarioPresenter) {
+    public ManterUsuarioCommand(TelaManterUsuarioPresenter presenterManterUsuario) {
         this.usuarioService = UsuarioService.getInstance();
-        this.presenterManterUsuario = presenterTelaUsuarioPresenter;
+        this.presenterManterUsuario = presenterManterUsuario;
     }
     
     @Override
