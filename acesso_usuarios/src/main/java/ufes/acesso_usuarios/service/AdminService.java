@@ -17,12 +17,12 @@ public class AdminService {
         this.admin = admin;
     }
     
-    public void autorizarUsuario(String nome){
+    public void autorizarUsuario(String nomeUsuario){
         //if(this.sistemaService.validarAdmin(this.admin.getNome())){
         if(this.sistemaService.validarAdmin(usuarioRepository.getUsuarios().get(0).getUsuario())){
-            Usuario usuario = usuarioRepository.buscar(nome);
+            Usuario usuario = usuarioRepository.buscarUsuario(nomeUsuario);
             //Altera o estado para Visuzalização
-            usuario.setEstado(new VisualizacaoState(this));
+            //usuario.setEstado(new VisualizacaoState(this));
             this.sistemaService.addUsuarioAutorizado(usuario, "comum");
         }
         else{
@@ -35,27 +35,26 @@ public class AdminService {
     }
     
     //CRUD
-    public void cadastrarUsuario(String nome, String usuario, String senha) {
-        Usuario novoUsuario = new Usuario(nome, usuario, senha);
+    public void cadastrarUsuario(String nomeUsuario, String usuario, String senha) {
+        Usuario novoUsuario = new Usuario(nomeUsuario, usuario, senha);
         usuarioRepository.addUsuario(novoUsuario);
     }
     
-    public void buscarUsuario(String nome){
-        usuarioRepository.buscar(nome);
+    public Usuario buscarUsuario(String nomeUsuario){
+        return usuarioRepository.buscarUsuario(nomeUsuario);
     }
     
-    public void atualizarNome(String nome, String novoNome){
-        Usuario usuario = usuarioRepository.buscar(nome);
-        usuario.setNome(novoNome);
+    public void atualizarUsuario(Usuario usuarioEditado){
+        usuarioRepository.atualizarUsuario(usuarioEditado);
     }
     
-    public void atualizarSenha(String nome, String novaSenha){
-        Usuario usuario = usuarioRepository.buscar(nome);
+    public void atualizarSenha(String nomeUsuario, String novaSenha){
+        Usuario usuario = usuarioRepository.buscarUsuario(nomeUsuario);
         usuario.setSenha(novaSenha);
     }
     
-    public void removerUsuario(String nome){
-        Usuario usuario = usuarioRepository.buscar(nome);
+    public void removerUsuario(String nomeUsuario){
+        Usuario usuario = usuarioRepository.buscarUsuario(nomeUsuario);
         usuarioRepository.removerUsuario(usuario);
     }
 

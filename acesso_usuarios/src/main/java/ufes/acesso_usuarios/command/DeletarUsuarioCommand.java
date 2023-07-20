@@ -1,18 +1,17 @@
 package ufes.acesso_usuarios.command;
-import ufes.acesso_usuarios.service.AdminService;
 
-public class DeletarUsuarioCommand implements Command {
-    private AdminService adminService;
-    private String nome;
+import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
 
-    public DeletarUsuarioCommand(AdminService adminService, String nome) {
-        this.adminService = adminService;
-        this.nome = nome;
+public class DeletarUsuarioCommand extends ManterUsuarioCommand {
+
+    public DeletarUsuarioCommand(TelaManterUsuarioPresenter presenterTelaUsuarioPresenter, String nomeUsuario) {
+        super(presenterTelaUsuarioPresenter);
+        this.nomeUsuario = nomeUsuario;
     }
 
     @Override
     public void execute() {
-        adminService.removerUsuario(nome);
+        adminService.removerUsuario(nomeUsuario);
     }
 }
 

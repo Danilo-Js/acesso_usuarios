@@ -1,19 +1,20 @@
 package ufes.acesso_usuarios.command;
-import ufes.acesso_usuarios.service.AdminService;
+import ufes.acesso_usuarios.model.Usuario;
+import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
 
-public class CriarUsuarioCommand implements Command {
-    private AdminService adminService;
-    private String nome;
-    private String senha;
-
-    public CriarUsuarioCommand(AdminService adminService, String nome, String senha) {
-        this.adminService = adminService;
-        this.nome = nome;
-        this.senha = senha;
+public class CriarUsuarioCommand extends ManterUsuarioCommand {
+    
+    public CriarUsuarioCommand(TelaManterUsuarioPresenter presenterTelaUsuarioPresenter) {
+        super(presenterTelaUsuarioPresenter);
     }
 
     @Override
     public void execute() {
-        //adminService.cadastrarUsuario(nome, senha);
+        nome = presenterManterUsuario.getTelaManterUsuario().getInputNome().getText();
+        nomeUsuario = presenterManterUsuario.getTelaManterUsuario().getInputUsuario().getText();
+        senha = presenterManterUsuario.getTelaManterUsuario().getInputSenha().getText();
+        usuario = new Usuario(nome, nomeUsuario, senha);
+        usuarioService.criarUsuario(usuario);
     }
+    
 }

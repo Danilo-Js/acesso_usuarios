@@ -21,26 +21,22 @@ public class Administrador extends Usuario{
     
     public void buscarUsuario(String nome){
         //estado.visualizarUsuario(nome);
-        Usuario usuario = usuarioRepository.buscar(nome);
-        usuario.estado.visualizarUsuario(nome);
+        Usuario usuario = usuarioRepository.buscarUsuario(nome);
     }
     
     public void atualizarNome(String nome, String novoNome){
         //estado.atualizarNome(nome, novoNome);
-        Usuario usuario = usuarioRepository.buscar(nome);
-        usuario.estado.atualizarNome(usuario.getUsuario(), novoNome);
+        Usuario usuario = usuarioRepository.buscarUsuario(nome);
     }
     
     public void atualizarSenha(String nome, String novaSenha){
         //estado.atualizarSenha(nome, novaSenha);
-        Usuario usuario = usuarioRepository.buscar(nome);
-        usuario.estado.atualizarSenha(usuario.getUsuario(), novaSenha);
+        Usuario usuario = usuarioRepository.buscarUsuario(nome);
     }
     
     public void removerUsuario(String nome){
         //estado.deletarUsuario(nome);
-        Usuario usuario = usuarioRepository.buscar(nome);
-        usuario.estado.deletarUsuario(usuario.getUsuario());
+        Usuario usuario = usuarioRepository.buscarUsuario(nome);
     }
 
     //UCs

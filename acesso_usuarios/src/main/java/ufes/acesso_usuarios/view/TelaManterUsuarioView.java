@@ -11,12 +11,12 @@ import javax.swing.JTextField;
  *
  * @author Gabriel
  */
-public class ManterUsuarioView extends javax.swing.JFrame {
+public class TelaManterUsuarioView extends javax.swing.JFrame {
 
     /**
      * Creates new form CriarUsuarioView
      */
-    public ManterUsuarioView() {
+    public TelaManterUsuarioView() {
         initComponents();
     }
 

@@ -1,25 +1,33 @@
 package ufes.acesso_usuarios.state;
-import ufes.acesso_usuarios.command.Command;
-import ufes.acesso_usuarios.command.VisualizarUsuarioCommand;
-import ufes.acesso_usuarios.service.AdminService;
+import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
+
 
 public abstract class UsuarioState {
-    protected AdminService adminService;
-
-    public UsuarioState(AdminService adminService) {
-        this.adminService = adminService;
+    protected TelaManterUsuarioPresenter presenterTelaManterUsuario;
+    protected String nomeUsuario;
+    
+    public UsuarioState(TelaManterUsuarioPresenter presenterTelaManterUsuario) {
+        this.presenterTelaManterUsuario = presenterTelaManterUsuario;
     }
 
-    public void visualizarUsuario(String nome) {
-        Command command = new VisualizarUsuarioCommand(adminService, nome);
-        command.execute();
+//    public void visualizarUsuario(String nome) {
+//        Command command = new VisualizarUsuarioCommand(adminService, nome);
+//        command.execute();
+//    }
+
+    public void criarUsuario(){
+        throw new RuntimeException("Opção não disponível.");
+    }
+    
+    public void atualizarUsuario(){
+        throw new RuntimeException("Opção não disponível.");
     }
 
-    public abstract void criarUsuario(String nome, String senha);
-
-    public abstract void atualizarNome(String nome, String novoNome);
-
-    public abstract void atualizarSenha(String nome, String novaSenha);
-
-    public abstract void deletarUsuario(String nome);
+    public void deletarUsuario(){
+        throw new RuntimeException("Opção não disponível.");
+    }
+    
+//    public void fecharTela(){
+//        this.presenterTelaManterUsuario.fecharTela();
+//    }
 }

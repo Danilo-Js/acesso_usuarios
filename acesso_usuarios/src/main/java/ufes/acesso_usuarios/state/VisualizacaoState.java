@@ -1,34 +1,23 @@
 package ufes.acesso_usuarios.state;
-import ufes.acesso_usuarios.service.AdminService;
 import ufes.acesso_usuarios.command.*;
+import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
 
 public class VisualizacaoState extends UsuarioState {
     
-    public VisualizacaoState(AdminService adminService) {
-        super(adminService);
+    public VisualizacaoState(TelaManterUsuarioPresenter presenterTelaUsuarioPresenter, String nomeUsuario) {
+        super(presenterTelaUsuarioPresenter);
+        this.nomeUsuario = nomeUsuario;
     }
 
     @Override
-    public void criarUsuario(String nome, String senha) {
-        // Ação não permitida no estado de visualização
-        System.out.println("Ação não permitida. Você não tem permissão para criar um usuário.");
-    }
-
-    @Override
-    public void atualizarNome(String nome, String novoNome) {
-        Command command = new AtualizarNomeCommand(adminService, nome, novoNome);
+    public void atualizarUsuario() {
+        ICommand command = new DeletarUsuarioCommand(presenterTelaManterUsuario, nomeUsuario);
         command.execute();
     }
 
     @Override
-    public void atualizarSenha(String nome, String novaSenha) {
-        Command command = new AtualizarSenhaCommand(adminService, nome, novaSenha);
-        command.execute();
-    }
-
-    @Override
-    public void deletarUsuario(String nome) {
-        Command command = new DeletarUsuarioCommand(adminService, nome);
+    public void deletarUsuario() {
+        ICommand command = new DeletarUsuarioCommand(presenterTelaManterUsuario, nomeUsuario);
         command.execute();
     }
 }

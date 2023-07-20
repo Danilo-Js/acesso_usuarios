@@ -21,7 +21,7 @@ public class SistemaService {
 
     // --LOGIN--
     public boolean validarAdmin(String nomeUsuario) {
-        this.admin = this.usuarioRepository.buscar(nomeUsuario);
+        this.admin = this.usuarioRepository.buscarUsuario(nomeUsuario);
         if (this.admin.getTipo().equals("admin")) {
             return true;
         } else {
@@ -31,11 +31,11 @@ public class SistemaService {
 
     public void addUsuarioAutorizado(Usuario usuario, String tipo) {
         usuario.setTipo(tipo);
-        this.usuarioRepository.atualizar(usuario);
+        this.usuarioRepository.atualizarUsuario(usuario);
     }
 
     public void fazerLogin(String nomeUsuario, String senha) {
-        this.usuario = this.usuarioRepository.buscar(nomeUsuario);
+        this.usuario = this.usuarioRepository.buscarUsuario(nomeUsuario);
         if (this.usuario == null) {
             System.out.println("O usuário não existe.");
         } 

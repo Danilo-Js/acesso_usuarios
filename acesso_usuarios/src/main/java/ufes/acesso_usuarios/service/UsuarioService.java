@@ -28,7 +28,7 @@ public class UsuarioService {
     }
     
     public boolean fazerLogin(String nomeUsuario, String senha) {
-        Usuario usuario = usuarioRepository.buscar(nomeUsuario);
+        Usuario usuario = usuarioRepository.buscarUsuario(nomeUsuario);
         
         if (usuario != null && usuario.getSenha().equals(senha)) {
             // Usuário encontrado e senha está correta, realiza o login
@@ -41,19 +41,12 @@ public class UsuarioService {
         return false;
     }
     
-    public void alterarSenha(Usuario usuario, String novaSenha){
-        //estado.atualizarSenha(nome, novaSenha);
-        System.out.println("Estado: " + usuario.getEstado());
-        usuario.getEstado().atualizarSenha(usuario.getUsuario(), novaSenha);
-        usuarioRepository.atualizar(usuario);
-    }
-    
     public void atualizarUsuario(Usuario usuario){
-        usuarioRepository.atualizar(usuario);
+        usuarioRepository.atualizarUsuario(usuario);
     }
 
     public void abrirNotificacoes(String nomeDestinatario) {
-        this.usuario = this.usuarioRepository.buscar(nomeDestinatario);
+        this.usuario = this.usuarioRepository.buscarUsuario(nomeDestinatario);
         if (this.usuario != null) {
             ArrayList<Notificacao> notificacoes = this.usuario.getNotificacoes();
             for (Notificacao notificacao : notificacoes) {
@@ -67,7 +60,7 @@ public class UsuarioService {
     }
     
     public Usuario buscarUsuario(String nomeUsuario){
-        this.usuario = this.usuarioRepository.buscar(nomeUsuario);
+        this.usuario = this.usuarioRepository.buscarUsuario(nomeUsuario);
         return this.usuario;
     }
 

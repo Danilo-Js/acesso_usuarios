@@ -1,7 +1,7 @@
 package ufes.acesso_usuarios.command;
 import ufes.acesso_usuarios.service.AdminService;
 
-public class VisualizarUsuarioCommand implements Command {
+public class VisualizarUsuarioCommand implements ICommand {
     private AdminService adminService;
     private String nome;
 

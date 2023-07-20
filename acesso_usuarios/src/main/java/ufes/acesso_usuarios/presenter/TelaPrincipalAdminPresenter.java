@@ -42,6 +42,7 @@ public class TelaPrincipalAdminPresenter {
 
             }
         });
+        
         //Botão Alterar Senha
         this.telaPrincipalAdmin.getOpcaoAlterarSenha().addActionListener(new ActionListener() {
             @Override
@@ -59,6 +60,8 @@ public class TelaPrincipalAdminPresenter {
                 presenterTelaLogin = new TelaLoginPresenter();
             }
         });
+        
+        
     }
 
 }

@@ -1,5 +1,5 @@
 package ufes.acesso_usuarios.command;
 
-public interface Command {
+public interface ICommand {
     void execute();
 }

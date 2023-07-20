@@ -1,35 +1,18 @@
 package ufes.acesso_usuarios.state;
-import ufes.acesso_usuarios.service.AdminService;
 import ufes.acesso_usuarios.command.*;
+import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
 
 public class InclusaoState extends UsuarioState {
-    
-    public InclusaoState(AdminService adminService) {
-        super(adminService);
+
+    public InclusaoState(TelaManterUsuarioPresenter presenterTelaManterUsuario) {
+        super(presenterTelaManterUsuario);
     }
 
     @Override
-    public void criarUsuario(String nome, String senha) {
-        Command command = new CriarUsuarioCommand(adminService, nome, senha);
+    public void criarUsuario() {
+        ICommand command = new CriarUsuarioCommand(presenterTelaManterUsuario);
         command.execute();
     }
 
-    @Override
-    public void atualizarNome(String nome, String novoNome) {
-        // Ação não permitida no estado de inclusão
-        System.out.println("Ação não permitida. O usuário ainda não foi criado.");
-    }
-
-    @Override
-    public void atualizarSenha(String nome, String novaSenha) {
-        // Ação não permitida no estado de inclusão
-        System.out.println("Ação não permitida. O usuário ainda não foi criado.");
-    }
-
-    @Override
-    public void deletarUsuario(String nome) {
-        // Ação não permitida no estado de inclusão
-        System.out.println("Ação não permitida. O usuário ainda não foi criado.");
-    }
 }
 

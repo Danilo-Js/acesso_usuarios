@@ -12,7 +12,6 @@ public class UsuarioRepository {
         Usuario admin = new Usuario("Gabriel", "gabriel", "123");
         admin.setAutorizado(true);
         admin.setTipo("admin");
-        admin.setEstado(new VisualizacaoState());
         this.usuarios.add(admin);
         
         System.out.println(usuarios.get(0).toString());
@@ -27,13 +26,14 @@ public class UsuarioRepository {
 
     public void addUsuario(Usuario usuario) {
         this.usuarios.add(usuario);
+        System.out.println("Usuários: " + usuarios.toString());
     }
 
     public void removerUsuario(Usuario usuario){
         this.usuarios.remove(usuario);
     }
 
-    public Usuario buscar(String nomeUsuario) {
+    public Usuario buscarUsuario(String nomeUsuario) {
         for (Usuario usuario : usuarios) {
             if (usuario.getUsuario().equals(nomeUsuario)) {
                 return usuario;
@@ -42,7 +42,7 @@ public class UsuarioRepository {
         return null;
     }
 
-    public void atualizar(Usuario usuario) {
+    public void atualizarUsuario(Usuario usuario) {
         for (int i = 0; i < usuarios.size(); i++) {
             if (usuarios.get(i).equals(usuario)) {
                 usuarios.set(i, usuario);
