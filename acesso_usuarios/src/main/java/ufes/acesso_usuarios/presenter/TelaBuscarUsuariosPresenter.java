@@ -114,7 +114,6 @@ public class TelaBuscarUsuariosPresenter {
                 if (indiceLinhaSelecionada != -1) {
                     String nomeUsuario = (String) tableUsuarios.getValueAt(indiceLinhaSelecionada, 1);
                     usuario = usuarioService.buscarUsuario(nomeUsuario);
-                    new NotificacoesPresenter(usuario);
                     exibirMensagem("Suas mensagens foram lidas.");
                 }
             }
