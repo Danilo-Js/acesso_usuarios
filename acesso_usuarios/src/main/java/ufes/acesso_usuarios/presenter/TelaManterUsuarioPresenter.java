@@ -1,9 +1,9 @@
 package ufes.acesso_usuarios.presenter;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import ufes.acesso_usuarios.model.Usuario;
+import ufes.acesso_usuarios.observer.Observer;
 import ufes.acesso_usuarios.service.UsuarioService;
 import ufes.acesso_usuarios.state.EdicaoState;
 import ufes.acesso_usuarios.state.InclusaoState;
@@ -11,7 +11,7 @@ import ufes.acesso_usuarios.state.State;
 import ufes.acesso_usuarios.state.VisualizacaoState;
 import ufes.acesso_usuarios.view.TelaManterUsuarioView;
 
-public class TelaManterUsuarioPresenter {
+public class TelaManterUsuarioPresenter implements Observer{
 
     private TelaManterUsuarioView telaManterUsuario;
     private UsuarioService usuarioService;
@@ -170,6 +170,11 @@ public class TelaManterUsuarioPresenter {
     private boolean mensagemExclusao(String mensagem) {
         int resposta = JOptionPane.showConfirmDialog(telaManterUsuario, mensagem, "Exclusão", JOptionPane.YES_NO_OPTION);
         return resposta == JOptionPane.YES_OPTION;
+    }
+    
+    @Override
+    public void atualizar() {
+        validarOpcao(null);
     }
 
 }
