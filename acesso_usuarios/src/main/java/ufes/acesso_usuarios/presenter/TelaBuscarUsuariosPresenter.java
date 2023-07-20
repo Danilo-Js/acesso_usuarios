@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import ufes.acesso_usuarios.model.Usuario;
-import ufes.acesso_usuarios.repository.UsuarioRepository;
 import ufes.acesso_usuarios.service.UsuarioService;
 import ufes.acesso_usuarios.state.InclusaoState;
 import ufes.acesso_usuarios.state.State;
@@ -19,11 +18,11 @@ public class TelaBuscarUsuariosPresenter {
     private TelaBuscarUsuariosView telaBuscarUsuariosView;
     private TelaManterUsuarioPresenter presenterTelaManterUsuario;
     private UsuarioService usuarioService;
-    private ArrayList<Usuario> usuarios = new ArrayList();
+    private ArrayList<Usuario> usuarios;
     private Usuario admin;
+    private Usuario usuario;
     private State estado;
     private JTable tableUsuarios;
-    private UsuarioRepository usuarioRepository;
 
     public TelaBuscarUsuariosPresenter(Usuario admin) {
         this.usuarioService = UsuarioService.getInstance();
@@ -31,6 +30,7 @@ public class TelaBuscarUsuariosPresenter {
         this.telaBuscarUsuariosView.setVisible(true);
         this.telaBuscarUsuariosView.setLocationRelativeTo(null);
         this.tableUsuarios = telaBuscarUsuariosView.getTableUsuarios();
+        this.usuarios = new ArrayList();
         this.admin = admin;
         preencherRodape();
         preencherTabela();
@@ -65,7 +65,6 @@ public class TelaBuscarUsuariosPresenter {
         DefaultTableModel tabelaModelo = (DefaultTableModel) this.tableUsuarios.getModel();
         tabelaModelo.setNumRows(0);
         this.usuarios = usuarioService.getUsuarios();
-        System.out.println("Usuarios: " + this.usuarios.get(0).toString());
         for (Usuario usuario : usuarios) {
             tabelaModelo.addRow(new Object[]{
                 usuario.getNome(),
@@ -94,7 +93,7 @@ public class TelaBuscarUsuariosPresenter {
         this.telaBuscarUsuariosView.getOpcaoAlterarSenha().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new TelaManterUsuarioPresenter(admin, "alterarSenha");
+                presenterTelaManterUsuario = new TelaManterUsuarioPresenter(admin, "alterarSenha");
             }
         });
 
@@ -111,12 +110,17 @@ public class TelaBuscarUsuariosPresenter {
         this.telaBuscarUsuariosView.getBtnAbrirNotificacoes().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int indiceLinhaSelecionada = tableUsuarios.getSelectedRow();
+                if (indiceLinhaSelecionada != -1) {
+                    String nomeUsuario = (String) tableUsuarios.getValueAt(indiceLinhaSelecionada, 1);
+                    usuario = usuarioService.buscarUsuario(nomeUsuario);
+                    new NotificacoesPresenter(usuario);
+                    exibirMensagem("Suas mensagens foram lidas.");
+                }
             }
         });
 
         //OPÇÕES ADMINISTRATIVAS
-        
         //Botão Buscar Usuário
         this.telaBuscarUsuariosView.getBtnBuscar().addActionListener(new ActionListener() {
             @Override
@@ -132,6 +136,7 @@ public class TelaBuscarUsuariosPresenter {
             @Override
             public void actionPerformed(ActionEvent e) {
                 alterarEstado(new InclusaoState(presenterTelaManterUsuario));
+                presenterTelaManterUsuario = new TelaManterUsuarioPresenter(null, "criarUsuario");
             }
         });
 
@@ -146,7 +151,7 @@ public class TelaBuscarUsuariosPresenter {
                     String nomeUsuario = (String) tableUsuarios.getValueAt(indiceLinhaSelecionada, 1);
                     String senha = (String) tableUsuarios.getValueAt(indiceLinhaSelecionada, 2);
                     Usuario usuarioSelecionado = new Usuario(nome, nomeUsuario, senha);
-                    new TelaManterUsuarioPresenter(usuarioSelecionado, "verUsuario");
+                    presenterTelaManterUsuario = new TelaManterUsuarioPresenter(usuarioSelecionado, "verUsuario");
                 } else {
                     exibirMensagem("Selecione um usuário na tabela para visualizar/editar.");
                 }

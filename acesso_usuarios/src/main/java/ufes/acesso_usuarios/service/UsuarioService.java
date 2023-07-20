@@ -7,14 +7,12 @@ import ufes.acesso_usuarios.repository.UsuarioRepository;
 public class UsuarioService {
 
     private static UsuarioService instance;
-    private SistemaService sistemaService;
     private NotificacaoService notificacaoService;
     private UsuarioRepository usuarioRepository;
     private ArrayList<Usuario> usuarios;
     private Usuario usuario;
 
     private UsuarioService() {
-        this.sistemaService = SistemaService.getInstance();
         this.notificacaoService = NotificacaoService.getInstance();
         this.usuarioRepository = UsuarioRepository.getInstance();
         this.usuarios = new ArrayList();

@@ -10,11 +10,6 @@ public abstract class State {
         this.presenterTelaManterUsuario = presenterTelaManterUsuario;
     }
 
-//    public void visualizarUsuario(String nome) {
-//        Command command = new VisualizarUsuarioCommand(adminService, nome);
-//        command.execute();
-//    }
-
     public void criarUsuario(){
         throw new RuntimeException("Opção não disponível.");
     }
@@ -27,7 +22,4 @@ public abstract class State {
         throw new RuntimeException("Opção não disponível.");
     }
     
-//    public void fecharTela(){
-//        this.presenterTelaManterUsuario.fecharTela();
-//    }
 }

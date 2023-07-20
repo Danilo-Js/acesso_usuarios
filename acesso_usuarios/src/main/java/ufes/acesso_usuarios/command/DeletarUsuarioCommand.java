@@ -11,7 +11,7 @@ public class DeletarUsuarioCommand extends ManterUsuarioCommand {
 
     @Override
     public void execute() {
-        adminService.removerUsuario(nomeUsuario);
+        usuarioService.removerUsuario(nomeUsuario);
     }
 }
 

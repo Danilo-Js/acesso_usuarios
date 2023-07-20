@@ -12,8 +12,6 @@ public class UsuarioRepository {
         admin.setAutorizado(true);
         admin.setTipo("admin");
         this.usuarios.add(admin);
-        
-        System.out.println(usuarios.get(0).toString());
     }
 
     public static UsuarioRepository getInstance() {
