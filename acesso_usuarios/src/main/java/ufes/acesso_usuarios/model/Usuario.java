@@ -6,21 +6,23 @@ import ufes.acesso_usuarios.service.UsuarioService;
 
 public class Usuario {
     private String nome;
+    private String usuario;
     private String senha;
     private LocalDate dataCadastro;
     private boolean autorizado;
     private ArrayList<Notificacao> notificacoes;
     private String tipo;
-    protected UsuarioState estado;
+    //protected UsuarioState estado;
     private UsuarioService usuarioService;
 
-    public Usuario(String nome, String senha) {
+    public Usuario(String nome, String usuario, String senha) {
         this.nome = nome;
+        this.usuario = usuario;
         this.senha = senha;
         this.dataCadastro = LocalDate.now();
         this.autorizado = false;
         this.notificacoes = new ArrayList<>();
-        this.estado = null; // Estado inicial é nulo
+        //this.estado = null; // Estado inicial é nulo
     }
 
     public void addNotificacao(Notificacao notificacao) {
@@ -64,6 +66,14 @@ public class Usuario {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
 
     public String getSenha() {
         return senha;
@@ -89,13 +99,13 @@ public class Usuario {
         return notificacoes;
     }
 
-    public void setEstado(UsuarioState estado) {
-        this.estado = estado;
-    }
-    
-    public UsuarioState getEstado() {
-        return estado;
-    }
+//    public void setEstado(UsuarioState estado) {
+//        this.estado = estado;
+//    }
+//    
+//    public UsuarioState getEstado() {
+//        return estado;
+//    }
 
     public String getTipo() {
         return tipo;
@@ -107,7 +117,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "nome=" + nome + ", senha=" + senha + ", dataCadastro=" + dataCadastro + ", autorizado=" + autorizado + ", notificacoes=" + notificacoes + ", tipo=" + tipo + ", estado=" + estado + ", usuarioService=" + usuarioService + '}';
+        return "Usuario{" + "nome=" + nome + ",usuario=" + usuario + ", senha=" + senha + ", dataCadastro=" + dataCadastro + ", autorizado=" + autorizado + ", notificacoes=" + notificacoes + ", tipo=" + tipo /*+ ", estado=" + estado*/ + ", usuarioService=" + usuarioService + '}';
     }
     
 }

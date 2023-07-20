@@ -19,7 +19,7 @@ public class AdminService {
     
     public void autorizarUsuario(String nome){
         //if(this.sistemaService.validarAdmin(this.admin.getNome())){
-        if(this.sistemaService.validarAdmin(usuarioRepository.getUsuarios().get(0).getNome())){
+        if(this.sistemaService.validarAdmin(usuarioRepository.getUsuarios().get(0).getUsuario())){
             Usuario usuario = usuarioRepository.buscar(nome);
             //Altera o estado para Visuzalização
             usuario.setEstado(new VisualizacaoState(this));
@@ -31,12 +31,12 @@ public class AdminService {
     }
     
     public void enviarNotificacao(ArrayList<String> destinatarios, String texto) {
-        notificacaoService.enviarNotificacao(admin.getNome(), destinatarios, texto);
+        notificacaoService.enviarNotificacao(admin.getUsuario(), destinatarios, texto);
     }
     
     //CRUD
-    public void cadastrarUsuario(String nome, String senha) {
-        Usuario novoUsuario = new Usuario(nome, senha);
+    public void cadastrarUsuario(String nome, String usuario, String senha) {
+        Usuario novoUsuario = new Usuario(nome, usuario, senha);
         usuarioRepository.addUsuario(novoUsuario);
     }
     

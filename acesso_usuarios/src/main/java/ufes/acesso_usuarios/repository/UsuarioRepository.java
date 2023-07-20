@@ -1,6 +1,7 @@
 package ufes.acesso_usuarios.repository;
 import java.util.ArrayList;
 import ufes.acesso_usuarios.model.Usuario;
+import ufes.acesso_usuarios.state.VisualizacaoState;
 
 public class UsuarioRepository {
     private static UsuarioRepository instance;
@@ -8,6 +9,13 @@ public class UsuarioRepository {
 
     private UsuarioRepository() {
         this.usuarios = new ArrayList<>();
+        Usuario admin = new Usuario("Gabriel", "gabriel", "123");
+        admin.setAutorizado(true);
+        admin.setTipo("admin");
+        admin.setEstado(new VisualizacaoState());
+        this.usuarios.add(admin);
+        
+        System.out.println(usuarios.get(0).toString());
     }
 
     public static UsuarioRepository getInstance() {
@@ -27,7 +35,7 @@ public class UsuarioRepository {
 
     public Usuario buscar(String nomeUsuario) {
         for (Usuario usuario : usuarios) {
-            if (usuario.getNome().equals(nomeUsuario)) {
+            if (usuario.getUsuario().equals(nomeUsuario)) {
                 return usuario;
             }
         }

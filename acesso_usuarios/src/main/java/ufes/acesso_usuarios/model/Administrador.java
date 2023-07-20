@@ -8,8 +8,8 @@ public class Administrador extends Usuario{
     private UsuarioRepository usuarioRepository;
     private AdminService adminService;
 
-    public Administrador(String nome, String senha) {
-        super(nome, senha);
+    public Administrador(String nome, String usuario, String senha) {
+        super(nome, usuario, senha);
         this.usuarioRepository = UsuarioRepository.getInstance();
         this.adminService = new AdminService(this);
     }
@@ -28,19 +28,19 @@ public class Administrador extends Usuario{
     public void atualizarNome(String nome, String novoNome){
         //estado.atualizarNome(nome, novoNome);
         Usuario usuario = usuarioRepository.buscar(nome);
-        usuario.estado.atualizarNome(usuario.getNome(), novoNome);
+        usuario.estado.atualizarNome(usuario.getUsuario(), novoNome);
     }
     
     public void atualizarSenha(String nome, String novaSenha){
         //estado.atualizarSenha(nome, novaSenha);
         Usuario usuario = usuarioRepository.buscar(nome);
-        usuario.estado.atualizarSenha(usuario.getNome(), novaSenha);
+        usuario.estado.atualizarSenha(usuario.getUsuario(), novaSenha);
     }
     
     public void removerUsuario(String nome){
         //estado.deletarUsuario(nome);
         Usuario usuario = usuarioRepository.buscar(nome);
-        usuario.estado.deletarUsuario(usuario.getNome());
+        usuario.estado.deletarUsuario(usuario.getUsuario());
     }
 
     //UCs
@@ -59,7 +59,7 @@ public class Administrador extends Usuario{
     public void listarUsuarios() {
         usuariosCadastrados = usuarioRepository.getUsuarios();
         for (Usuario usuario : usuariosCadastrados) {
-            System.out.println("Nome: " + usuario.getNome());
+            System.out.println("Nome: " + usuario.getUsuario());
             System.out.println("Data de Cadastro: " + usuario.getDataCadastro());
             System.out.println("Número de Notificações Enviadas: " + usuario.getQtdNotificacoesRecebidas());
             System.out.println("Número de Notificações Lidas: " + usuario.getQtdNotificacoesLidas());

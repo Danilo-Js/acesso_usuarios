@@ -14,6 +14,6 @@ public class CriarUsuarioCommand implements Command {
 
     @Override
     public void execute() {
-        adminService.cadastrarUsuario(nome, senha);
+        //adminService.cadastrarUsuario(nome, senha);
     }
 }

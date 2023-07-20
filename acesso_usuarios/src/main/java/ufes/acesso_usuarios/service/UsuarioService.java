@@ -5,53 +5,70 @@ import ufes.acesso_usuarios.model.Usuario;
 import ufes.acesso_usuarios.repository.UsuarioRepository;
 
 public class UsuarioService {
-
+    private static UsuarioService instance;
     private SistemaService sistemaService;
     private UsuarioRepository usuarioRepository;
     private ArrayList<Usuario> usuarios;
     private Usuario usuario;
 
-    public UsuarioService() {
+    private UsuarioService() {
         this.sistemaService = SistemaService.getInstance();
         this.usuarioRepository = UsuarioRepository.getInstance();
+    }
+
+    public static UsuarioService getInstance() {
+        if (instance == null) {
+            instance = new UsuarioService();
+        }
+        return instance;
     }
 
     public void criarUsuario(Usuario usuario) {
         this.usuarioRepository.addUsuario(usuario);
     }
     
-    public void alterarSenha(String nome, String novaSenha){
+    public boolean fazerLogin(String nomeUsuario, String senha) {
+        Usuario usuario = usuarioRepository.buscar(nomeUsuario);
+        
+        if (usuario != null && usuario.getSenha().equals(senha)) {
+            // Usuário encontrado e senha está correta, realiza o login
+            System.out.println("Login realizado com sucesso!");
+            return true;
+        } 
+        else {
+            System.out.println("Usuário ou senha incorretos. Tente novamente.");
+        }
+        return false;
+    }
+    
+    public void alterarSenha(Usuario usuario, String novaSenha){
         //estado.atualizarSenha(nome, novaSenha);
-        this.usuario = usuarioRepository.buscar(nome);
-        this.usuario.getEstado().atualizarSenha(usuario.getNome(), novaSenha);
+        System.out.println("Estado: " + usuario.getEstado());
+        usuario.getEstado().atualizarSenha(usuario.getUsuario(), novaSenha);
+        usuarioRepository.atualizar(usuario);
     }
     
     public void atualizarUsuario(Usuario usuario){
         usuarioRepository.atualizar(usuario);
     }
 
-    public void acessarSistema(String nome, String senha) {
-        this.usuarios = this.usuarioRepository.getUsuarios();
-        if (this.usuarios.size() == 1) {
-            this.usuario = this.usuarioRepository.buscar(nome);
-            this.sistemaService.addUsuarioAutorizado(usuario, "admin");
-        }
-        this.sistemaService.fazerLogin(nome, senha);
-    }
-
-    public void visualizarNotificacao(String nomeDestinatario) {
+    public void abrirNotificacoes(String nomeDestinatario) {
         this.usuario = this.usuarioRepository.buscar(nomeDestinatario);
         if (this.usuario != null) {
             ArrayList<Notificacao> notificacoes = this.usuario.getNotificacoes();
             for (Notificacao notificacao : notificacoes) {
                 System.out.println("Mensagem: " + notificacao.toString());
-                marcarMensagemComoLida(notificacao);
             }
         }
     }
 
     public void marcarMensagemComoLida(Notificacao notificacao) {
         notificacao.setLida(true);
+    }
+    
+    public Usuario buscarUsuario(String nomeUsuario){
+        this.usuario = this.usuarioRepository.buscar(nomeUsuario);
+        return this.usuario;
     }
 
 }
