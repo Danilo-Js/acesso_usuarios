@@ -47,7 +47,7 @@ public class TelaBuscarUsuariosPresenter {
     private void preencherTabela(Usuario usuario) {
         DefaultTableModel tabelaModelo = (DefaultTableModel) this.tableUsuarios.getModel();
         tabelaModelo.setNumRows(0);
-        
+
         if (usuario != null) {
             tabelaModelo.addRow(new Object[]{
                 usuario.getNome(),
@@ -111,11 +111,12 @@ public class TelaBuscarUsuariosPresenter {
         this.telaBuscarUsuariosView.getBtnAbrirNotificacoes().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //
+
             }
         });
 
         //OPÇÕES ADMINISTRATIVAS
+        
         //Botão Buscar Usuário
         this.telaBuscarUsuariosView.getBtnBuscar().addActionListener(new ActionListener() {
             @Override
@@ -138,7 +139,17 @@ public class TelaBuscarUsuariosPresenter {
         this.telaBuscarUsuariosView.getBtnVisualizar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int indiceLinhaSelecionada = tableUsuarios.getSelectedRow();
 
+                if (indiceLinhaSelecionada != -1) {
+                    String nome = (String) tableUsuarios.getValueAt(indiceLinhaSelecionada, 0);
+                    String nomeUsuario = (String) tableUsuarios.getValueAt(indiceLinhaSelecionada, 1);
+                    String senha = (String) tableUsuarios.getValueAt(indiceLinhaSelecionada, 2);
+                    Usuario usuarioSelecionado = new Usuario(nome, nomeUsuario, senha);
+                    new TelaManterUsuarioPresenter(usuarioSelecionado, "verUsuario");
+                } else {
+                    exibirMensagem("Selecione um usuário na tabela para visualizar/editar.");
+                }
             }
         });
 
@@ -146,7 +157,14 @@ public class TelaBuscarUsuariosPresenter {
         this.telaBuscarUsuariosView.getBtnAutorizarUsuarios().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int indiceLinhaSelecionada = tableUsuarios.getSelectedRow();
+                if (indiceLinhaSelecionada != -1) {
+                    String nomeUsuario = (String) tableUsuarios.getValueAt(indiceLinhaSelecionada, 1);
+                    usuarioService.autorizarUsuario(nomeUsuario);
+                    exibirMensagem("Usuário " + nomeUsuario + " autorizado a acessar o sistema.");
+                } else {
+                    exibirMensagem("Selecione um usuário na tabela autorizar o acesso.");
+                }
             }
         });
 
@@ -154,7 +172,14 @@ public class TelaBuscarUsuariosPresenter {
         this.telaBuscarUsuariosView.getBtnEnviarNotificacoes().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                int indiceLinhaSelecionada = tableUsuarios.getSelectedRow();
+                if (indiceLinhaSelecionada != -1) {
+                    String nomeUsuario = (String) tableUsuarios.getValueAt(indiceLinhaSelecionada, 1);
+                    //Enviar a notificação
+                    exibirMensagem("Notificação enviada.");
+                } else {
+                    exibirMensagem("Selecione um usuário para notificar.");
+                }
             }
         });
 

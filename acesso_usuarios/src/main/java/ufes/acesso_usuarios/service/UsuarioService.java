@@ -1,5 +1,4 @@
 package ufes.acesso_usuarios.service;
-
 import java.util.ArrayList;
 import ufes.acesso_usuarios.model.Notificacao;
 import ufes.acesso_usuarios.model.Usuario;
@@ -42,19 +41,21 @@ public class UsuarioService {
 
     public boolean fazerLogin(String nomeUsuario, String senha) {
         Usuario usuario = usuarioRepository.buscarUsuario(nomeUsuario);
-
         if (usuario != null && usuario.getSenha().equals(senha)) {
             // Usuário encontrado e senha está correta, realiza o login
-            System.out.println("Login realizado com sucesso!");
             return true;
         } else {
-            System.out.println("Usuário ou senha incorretos. Tente novamente.");
+            throw new IllegalArgumentException("Usuário ou senha incorretos. Tente novamente.");
         }
-        return false;
     }
 
     public void atualizarUsuario(Usuario usuario) {
         usuarioRepository.atualizarUsuario(usuario);
+    }
+    
+    public void removerUsuario(String nomeUsuario){
+        Usuario usuario = usuarioRepository.buscarUsuario(nomeUsuario);
+        usuarioRepository.removerUsuario(usuario);
     }
 
     public void abrirNotificacoes(String nomeDestinatario) {
@@ -63,7 +64,6 @@ public class UsuarioService {
             ArrayList<Notificacao> notificacoes = this.usuario.getNotificacoes();
             for (Notificacao notificacao : notificacoes) {
                 //
-                System.out.println("Mensagem: " + notificacao.toString());
             }
         }
     }
@@ -83,13 +83,9 @@ public class UsuarioService {
     }
 
     public void autorizarUsuario(String nomeUsuario) {
-        //if(this.sistemaService.validarAdmin(this.admin.getNome())){
-        if (this.sistemaService.validarAdmin(usuarioRepository.getUsuarios().get(0).getNomeUsuario())) {
-            Usuario usuario = usuarioRepository.buscarUsuario(nomeUsuario);
-            //Altera o estado para Visuzalização
-            //usuario.setEstado(new VisualizacaoState(this));
-            this.sistemaService.addUsuarioAutorizado(usuario, "comum");
-        }
+        Usuario usuario = usuarioRepository.buscarUsuario(nomeUsuario);
+        usuario.setAutorizado(true);
+        atualizarUsuario(usuario);
     }
 
     public void enviarNotificacao(ArrayList<String> destinatarios, String texto) {

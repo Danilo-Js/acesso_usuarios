@@ -32,6 +32,8 @@ public class TelaManterUsuarioView extends javax.swing.JFrame {
         inputSenha = new javax.swing.JTextField();
         btnCriar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Manter Usuário");
@@ -52,10 +54,16 @@ public class TelaManterUsuarioView extends javax.swing.JFrame {
         inputSenha.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnCriar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnCriar.setText("Criar");
+        btnCriar.setText("Cadastrar");
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnCancelar.setText("Cancelar");
+        btnCancelar.setText("Fechar");
+
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnExcluir.setText("Excluir");
+
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditar.setText("Editar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -63,8 +71,12 @@ public class TelaManterUsuarioView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(44, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCriar))
@@ -103,7 +115,9 @@ public class TelaManterUsuarioView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCriar)
-                    .addComponent(btnCancelar))
+                    .addComponent(btnCancelar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnEditar))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -131,9 +145,19 @@ public class TelaManterUsuarioView extends javax.swing.JFrame {
         return inputUsuario;
     }
 
+    public JButton getBtnEditar() {
+        return btnEditar;
+    }
+
+    public JButton getBtnExcluir() {
+        return btnExcluir;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCriar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JTextField inputNome;
     private javax.swing.JTextField inputSenha;
     private javax.swing.JTextField inputUsuario;
