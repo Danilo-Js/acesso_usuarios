@@ -1,4 +1,5 @@
 package ufes.acesso_usuarios.service;
+import java.util.ArrayList;
 import ufes.acesso_usuarios.model.Notificacao;
 import ufes.acesso_usuarios.model.Usuario;
 import ufes.acesso_usuarios.repository.NotificacaoRepository;
