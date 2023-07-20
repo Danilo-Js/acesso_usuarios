@@ -21,6 +21,7 @@ public class TelaManterUsuarioPresenter implements Observer{
     public TelaManterUsuarioPresenter(Usuario usuario, String opcao) {
         this.telaManterUsuario = new TelaManterUsuarioView();
         this.usuarioService = UsuarioService.getInstance();
+        this.usuarioService.adicionarObservador(this);
         this.telaManterUsuario.setVisible(true);
         this.telaManterUsuario.setLocationRelativeTo(null);
         this.telaManterUsuario.setResizable(false);
