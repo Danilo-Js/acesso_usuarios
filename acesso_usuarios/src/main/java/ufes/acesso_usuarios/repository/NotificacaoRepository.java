@@ -1,6 +1,7 @@
 package ufes.acesso_usuarios.repository;
 import java.util.ArrayList;
 import ufes.acesso_usuarios.dao.NotificationDAO;
+import ufes.acesso_usuarios.log.Log;
 import ufes.acesso_usuarios.model.Notificacao;
 
 public class NotificacaoRepository {
@@ -9,10 +10,12 @@ public class NotificacaoRepository {
     private Notificacao notificacao;
     
     NotificationDAO notificationDAO;
-
+    Log log;
+    
     private NotificacaoRepository() {
         this.notificationDAO = new NotificationDAO();
         this.notificacoes = this.notificationDAO.getNotifications();
+        this.log = new Log("CSV");
     }
     
     public static NotificacaoRepository getInstance() {
