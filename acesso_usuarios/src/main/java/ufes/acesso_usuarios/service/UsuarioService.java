@@ -78,6 +78,7 @@ public class UsuarioService extends Observado{
 
     public ArrayList getUsuarios() {
         this.usuarios = this.usuarioRepository.getUsuarios();
+        notificarObservadores();
         return this.usuarios;
     }
 
@@ -90,5 +91,7 @@ public class UsuarioService extends Observado{
     public void enviarNotificacao(ArrayList<String> destinatarios, String texto) {
         //notificacaoService.enviarNotificacao(admin.getUsuario(), destinatarios, texto);
     }
+    
+    
 
 }
