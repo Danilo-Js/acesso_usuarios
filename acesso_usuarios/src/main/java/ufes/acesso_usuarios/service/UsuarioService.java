@@ -2,9 +2,10 @@ package ufes.acesso_usuarios.service;
 import java.util.ArrayList;
 import ufes.acesso_usuarios.model.Notificacao;
 import ufes.acesso_usuarios.model.Usuario;
+import ufes.acesso_usuarios.observer.Observado;
 import ufes.acesso_usuarios.repository.UsuarioRepository;
 
-public class UsuarioService {
+public class UsuarioService extends Observado{
 
     private static UsuarioService instance;
     private NotificacaoService notificacaoService;
@@ -77,6 +78,7 @@ public class UsuarioService {
 
     public ArrayList getUsuarios() {
         this.usuarios = this.usuarioRepository.getUsuarios();
+        notificarObservadores();
         return this.usuarios;
     }
 
@@ -89,5 +91,4 @@ public class UsuarioService {
     public void enviarNotificacao(ArrayList<String> destinatarios, String texto) {
         //notificacaoService.enviarNotificacao(admin.getUsuario(), destinatarios, texto);
     }
-
 }

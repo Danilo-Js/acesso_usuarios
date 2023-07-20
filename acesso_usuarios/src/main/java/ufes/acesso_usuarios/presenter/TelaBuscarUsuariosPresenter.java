@@ -1,5 +1,4 @@
 package ufes.acesso_usuarios.presenter;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeFormatter;
@@ -8,16 +7,19 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import ufes.acesso_usuarios.model.Usuario;
+import ufes.acesso_usuarios.observer.Observer;
+import ufes.acesso_usuarios.service.NotificacaoService;
 import ufes.acesso_usuarios.service.UsuarioService;
 import ufes.acesso_usuarios.state.InclusaoState;
 import ufes.acesso_usuarios.state.State;
 import ufes.acesso_usuarios.view.TelaBuscarUsuariosView;
 
-public class TelaBuscarUsuariosPresenter {
+public class TelaBuscarUsuariosPresenter implements Observer {
 
     private TelaBuscarUsuariosView telaBuscarUsuariosView;
     private TelaManterUsuarioPresenter presenterTelaManterUsuario;
     private UsuarioService usuarioService;
+    private NotificacaoService notificacaoService;
     private ArrayList<Usuario> usuarios;
     private Usuario admin;
     private Usuario usuario;
@@ -26,6 +28,8 @@ public class TelaBuscarUsuariosPresenter {
 
     public TelaBuscarUsuariosPresenter(Usuario admin) {
         this.usuarioService = UsuarioService.getInstance();
+        this.usuarioService.adicionarObservador(this);
+        this.notificacaoService = NotificacaoService.getInstance();
         this.telaBuscarUsuariosView = new TelaBuscarUsuariosView();
         this.telaBuscarUsuariosView.setVisible(true);
         this.telaBuscarUsuariosView.setLocationRelativeTo(null);
@@ -179,7 +183,8 @@ public class TelaBuscarUsuariosPresenter {
                 int indiceLinhaSelecionada = tableUsuarios.getSelectedRow();
                 if (indiceLinhaSelecionada != -1) {
                     String nomeUsuario = (String) tableUsuarios.getValueAt(indiceLinhaSelecionada, 1);
-                    //Enviar a notificação
+                    notificacaoService.enviarNotificacao(admin.getNomeUsuario(), nomeUsuario, "Seja Bem-vindo ao nosso sistema!");
+                    usuarioService.atualizarUsuario(usuario);
                     exibirMensagem("Notificação enviada.");
                 } else {
                     exibirMensagem("Selecione um usuário para notificar.");
@@ -196,5 +201,10 @@ public class TelaBuscarUsuariosPresenter {
     public void exibirMensagem(String mensagem) {
         JOptionPane.showMessageDialog(telaBuscarUsuariosView, mensagem, "Aviso", JOptionPane.INFORMATION_MESSAGE);
         telaBuscarUsuariosView.dispose();
+    }
+
+    @Override
+    public void atualizar() {
+        preencherTabela();
     }
 }

@@ -2,11 +2,13 @@ package ufes.acesso_usuarios.presenter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import ufes.acesso_usuarios.model.Usuario;
+import ufes.acesso_usuarios.observer.Observer;
+import ufes.acesso_usuarios.service.UsuarioService;
 import ufes.acesso_usuarios.state.State;
 import ufes.acesso_usuarios.state.VisualizacaoState;
 import ufes.acesso_usuarios.view.TelaPrincipalUsuarioView;
 
-public class TelaPrincipalUsuarioPresenter {
+public class TelaPrincipalUsuarioPresenter implements Observer{
     private TelaPrincipalUsuarioView telaPrincipalUsuario;
     private TelaLoginPresenter presenterTelaLogin;
     private TelaManterUsuarioPresenter presenterTelaManterUsuario;
@@ -19,6 +21,7 @@ public class TelaPrincipalUsuarioPresenter {
         this.telaPrincipalUsuario.setLocationRelativeTo(null);
         this.telaPrincipalUsuario.setResizable(false);
         this.usuario = usuario;
+        UsuarioService.getInstance().adicionarObservador(this);
         preencherRodape();
         //Listeners dos Botões
         listenersBotoes();
@@ -71,6 +74,11 @@ public class TelaPrincipalUsuarioPresenter {
     
     public void alterarEstado(State estado){
         this.estado = estado;
+    }
+
+    @Override
+    public void atualizar() {
+        listenersBotoes();
     }
 
 }

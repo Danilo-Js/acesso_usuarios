@@ -100,6 +100,14 @@ public class Usuario {
     public ArrayList<Notificacao> getNotificacoes() {
         return notificacoes;
     }
+
+//    public void setEstado(UsuarioState estado) {
+//        this.estado = estado;
+//    }
+//    
+//    public UsuarioState getEstado() {
+//        return estado;
+//    }
     
     public void setNotificacoes(ArrayList<Notificacao> notificacoes) {
         this.notificacoes = notificacoes;

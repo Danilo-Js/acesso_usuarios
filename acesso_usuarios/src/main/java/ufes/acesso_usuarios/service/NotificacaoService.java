@@ -1,17 +1,19 @@
 package ufes.acesso_usuarios.service;
-import java.util.ArrayList;
 import ufes.acesso_usuarios.model.Notificacao;
+import ufes.acesso_usuarios.model.Usuario;
 import ufes.acesso_usuarios.repository.NotificacaoRepository;
 
 public class NotificacaoService {
     private static NotificacaoService instance;
     private Notificacao notificacao;
     private NotificacaoRepository notificacaoRepository ;
+    private UsuarioService usuarioService;
 
     public NotificacaoService() {
-        notificacaoRepository = NotificacaoRepository.getInstance();
+        this.notificacaoRepository = NotificacaoRepository.getInstance();
+        this.usuarioService = UsuarioService.getInstance();
     }
-
+  
     public static NotificacaoService getInstance() {
         if (instance == null) {
             instance = new NotificacaoService();
@@ -23,6 +25,13 @@ public class NotificacaoService {
         for (String destinatario : destinatarios) {
             Notificacao notificacao = new Notificacao(remetente, destinatario, mensagem);
         }
+        return instance;
+    }
+    
+    public void enviarNotificacao(String remetente, String destinatario, String mensagem) {
+        notificacao = new Notificacao(remetente, destinatario, mensagem);
+        Usuario usuario = usuarioService.buscarUsuario(mensagem);
+        usuarioService.atualizarUsuario(usuario);
     }
     
     private Notificacao buscarNotificacao(int id){
@@ -40,6 +49,4 @@ public class NotificacaoService {
     private void atualizarNotificacao(Notificacao notificacaoLida){
         notificacaoRepository.atualizarNotificacao(notificacaoLida);
     }
-    
-    
 }
