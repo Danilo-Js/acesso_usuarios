@@ -85,6 +85,10 @@ public class Usuario {
         return dataCadastro;
     }
 
+    public void setDataCadastro(LocalDate data) {
+        this.dataCadastro = data;
+    }
+    
     public boolean isAutorizado() {
         return autorizado;
     }
@@ -95,6 +99,18 @@ public class Usuario {
 
     public ArrayList<Notificacao> getNotificacoes() {
         return notificacoes;
+    }
+
+//    public void setEstado(UsuarioState estado) {
+//        this.estado = estado;
+//    }
+//    
+//    public UsuarioState getEstado() {
+//        return estado;
+//    }
+    
+    public void setNotificacoes(ArrayList<Notificacao> notificacoes) {
+        this.notificacoes = notificacoes;
     }
 
 //    public void setEstado(UsuarioState estado) {

@@ -91,7 +91,4 @@ public class UsuarioService extends Observado{
     public void enviarNotificacao(ArrayList<String> destinatarios, String texto) {
         //notificacaoService.enviarNotificacao(admin.getUsuario(), destinatarios, texto);
     }
-    
-    
-
 }

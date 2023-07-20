@@ -13,10 +13,17 @@ public class NotificacaoService {
         this.notificacaoRepository = NotificacaoRepository.getInstance();
         this.usuarioService = UsuarioService.getInstance();
     }
-
+  
     public static NotificacaoService getInstance() {
         if (instance == null) {
             instance = new NotificacaoService();
+        }
+        return instance;
+    }
+    
+    private void enviarNotificacao(String remetente, ArrayList<String> destinatarios, String mensagem) {
+        for (String destinatario : destinatarios) {
+            Notificacao notificacao = new Notificacao(remetente, destinatario, mensagem);
         }
         return instance;
     }
@@ -42,5 +49,4 @@ public class NotificacaoService {
     private void atualizarNotificacao(Notificacao notificacaoLida){
         notificacaoRepository.atualizarNotificacao(notificacaoLida);
     }
-    
 }
