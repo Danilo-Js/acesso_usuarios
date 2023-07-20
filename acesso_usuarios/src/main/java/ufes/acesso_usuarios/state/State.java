@@ -2,11 +2,11 @@ package ufes.acesso_usuarios.state;
 import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
 
 
-public abstract class UsuarioState {
+public abstract class State {
     protected TelaManterUsuarioPresenter presenterTelaManterUsuario;
     protected String nomeUsuario;
     
-    public UsuarioState(TelaManterUsuarioPresenter presenterTelaManterUsuario, String nomeUsuario) {
+    public State(TelaManterUsuarioPresenter presenterTelaManterUsuario, String nomeUsuario) {
         this.presenterTelaManterUsuario = presenterTelaManterUsuario;
     }
 

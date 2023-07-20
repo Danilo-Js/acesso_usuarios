@@ -14,17 +14,14 @@ public class AtualizarUsuarioCommand extends ManterUsuarioCommand {
 
     @Override
     public void execute() {
-        
-        Usuario usuarioEditado = usuarioService.buscarUsuario("gabriel");
-        System.out.println("Editado: " + usuarioEditado);
+        Usuario usuarioEditado = usuarioService.buscarUsuario(nomeUsuario);
         
         String novoNome = presenterManterUsuario.getTelaManterUsuario().getInputNome().getText();
         String novoNomeUsuario = presenterManterUsuario.getTelaManterUsuario().getInputUsuario().getText();
         String novaSenha = presenterManterUsuario.getTelaManterUsuario().getInputSenha().getText();
-        System.out.println("Nova senha: " + novaSenha);
         
         usuarioEditado.setNome(novoNome);
-        usuarioEditado.setUsuario(novoNomeUsuario);
+        usuarioEditado.setNomeUsuario(novoNomeUsuario);
         usuarioEditado.setSenha(novaSenha);
         
         usuarioService.atualizarUsuario(usuarioEditado);

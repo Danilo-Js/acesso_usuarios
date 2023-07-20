@@ -2,36 +2,31 @@ package ufes.acesso_usuarios.presenter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import ufes.acesso_usuarios.model.Usuario;
-import ufes.acesso_usuarios.state.UsuarioState;
+import ufes.acesso_usuarios.state.State;
+import ufes.acesso_usuarios.state.VisualizacaoState;
 import ufes.acesso_usuarios.view.TelaPrincipalUsuarioView;
 
 public class TelaPrincipalUsuarioPresenter {
-    private static TelaPrincipalUsuarioPresenter instance; 
     private TelaPrincipalUsuarioView telaPrincipalUsuario;
     private TelaLoginPresenter presenterTelaLogin;
     private TelaManterUsuarioPresenter presenterTelaManterUsuario;
     private Usuario usuario;
-    private UsuarioState estado;
+    private State estado;
     
-    private TelaPrincipalUsuarioPresenter(Usuario usuario) {
+    public TelaPrincipalUsuarioPresenter(Usuario usuario) {
         this.telaPrincipalUsuario = new TelaPrincipalUsuarioView();
         this.telaPrincipalUsuario.setVisible(true);
         this.telaPrincipalUsuario.setLocationRelativeTo(null);
+        this.telaPrincipalUsuario.setResizable(false);
         this.usuario = usuario;
         preencherRodape();
         //Listeners dos Botões
         listenersBotoes();
-    }
-    
-    public static TelaPrincipalUsuarioPresenter getInstance(Usuario usuario) {
-        if (instance == null) {
-            instance = new TelaPrincipalUsuarioPresenter(usuario);
-        }
-        return instance;
+        this.estado = new VisualizacaoState(new TelaManterUsuarioPresenter(usuario, null), usuario.getNomeUsuario());
     }
     
     public void preencherRodape(){
-        telaPrincipalUsuario.getTxtNomeUsuario().setText(usuario.getUsuario());
+        telaPrincipalUsuario.getTxtNomeUsuario().setText(usuario.getNomeUsuario());
         telaPrincipalUsuario.getTxtTipoUsuario().setText(usuario.getTipo());
         telaPrincipalUsuario.getTxtQtdNotificacoes().setText(String.valueOf(usuario.getQtdNotificacoesRecebidas()));
     }
@@ -74,7 +69,7 @@ public class TelaPrincipalUsuarioPresenter {
         });
     }
     
-    public void alterarEstado(UsuarioState estado){
+    public void alterarEstado(State estado){
         this.estado = estado;
     }
 

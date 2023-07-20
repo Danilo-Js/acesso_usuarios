@@ -2,7 +2,7 @@ package ufes.acesso_usuarios.state;
 import ufes.acesso_usuarios.command.*;
 import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
 
-public class InclusaoState extends UsuarioState {
+public class InclusaoState extends State {
 
     public InclusaoState(TelaManterUsuarioPresenter presenterTelaManterUsuario) {
         super(presenterTelaManterUsuario, null);

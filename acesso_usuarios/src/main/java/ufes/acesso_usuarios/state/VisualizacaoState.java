@@ -2,7 +2,7 @@ package ufes.acesso_usuarios.state;
 import ufes.acesso_usuarios.command.*;
 import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
 
-public class VisualizacaoState extends UsuarioState {
+public class VisualizacaoState extends State {
     
     public VisualizacaoState(TelaManterUsuarioPresenter presenterTelaUsuarioPresenter, String nomeUsuario) {
         super(presenterTelaUsuarioPresenter, nomeUsuario);
@@ -11,7 +11,7 @@ public class VisualizacaoState extends UsuarioState {
 
     @Override
     public void atualizarUsuario() {
-        ICommand command = new DeletarUsuarioCommand(presenterTelaManterUsuario, nomeUsuario);
+        ICommand command = new AtualizarUsuarioCommand(presenterTelaManterUsuario, nomeUsuario);
         command.execute();
     }
 

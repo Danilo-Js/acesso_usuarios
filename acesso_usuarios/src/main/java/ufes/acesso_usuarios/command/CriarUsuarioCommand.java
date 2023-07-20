@@ -14,7 +14,6 @@ public class CriarUsuarioCommand extends ManterUsuarioCommand {
         nomeUsuario = presenterManterUsuario.getTelaManterUsuario().getInputUsuario().getText();
         senha = presenterManterUsuario.getTelaManterUsuario().getInputSenha().getText();
         usuario = new Usuario(nome, nomeUsuario, senha);
-        System.out.println("Alou...");
         usuarioService.criarUsuario(usuario);
     }
     

@@ -1,4 +1,5 @@
 package ufes.acesso_usuarios.service;
+import java.util.ArrayList;
 import ufes.acesso_usuarios.model.Usuario;
 import ufes.acesso_usuarios.repository.UsuarioRepository;
 
@@ -6,7 +7,7 @@ public class SistemaService {
     private UsuarioRepository usuarioRepository;
     private static SistemaService instance;
     private Usuario admin;
-    private Usuario usuario;
+    private ArrayList<Usuario> usuarios;
 
     public SistemaService() {
         this.usuarioRepository = UsuarioRepository.getInstance();
@@ -34,20 +35,8 @@ public class SistemaService {
         this.usuarioRepository.atualizarUsuario(usuario);
     }
 
-    public void fazerLogin(String nomeUsuario, String senha) {
-        this.usuario = this.usuarioRepository.buscarUsuario(nomeUsuario);
-        if (this.usuario == null) {
-            System.out.println("O usuário não existe.");
-        } 
-        else if (this.usuario.isAutorizado()) {
-            if(this.usuario.getSenha().equals(senha)){
-                System.out.println("Usuário logado.");
-            }
-            else{
-                System.out.println("Senha incorreta.");
-            }
-        }
+    public Usuario getAdmin() {
+        return admin;
     }
-    
      
 }

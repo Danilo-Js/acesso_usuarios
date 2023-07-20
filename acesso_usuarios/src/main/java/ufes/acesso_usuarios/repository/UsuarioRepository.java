@@ -1,7 +1,6 @@
 package ufes.acesso_usuarios.repository;
 import java.util.ArrayList;
 import ufes.acesso_usuarios.model.Usuario;
-import ufes.acesso_usuarios.state.VisualizacaoState;
 
 public class UsuarioRepository {
     private static UsuarioRepository instance;
@@ -35,7 +34,7 @@ public class UsuarioRepository {
 
     public Usuario buscarUsuario(String nomeUsuario) {
         for (Usuario usuario : usuarios) {
-            if (usuario.getUsuario().equals(nomeUsuario)) {
+            if (usuario.getNomeUsuario().equals(nomeUsuario)) {
                 return usuario;
             }
         }

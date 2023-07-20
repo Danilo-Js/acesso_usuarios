@@ -3,7 +3,7 @@ import ufes.acesso_usuarios.service.AdminService;
 import ufes.acesso_usuarios.command.*;
 import ufes.acesso_usuarios.presenter.TelaManterUsuarioPresenter;
 
-public class EdicaoState extends UsuarioState {
+public class EdicaoState extends State {
 
     public EdicaoState(TelaManterUsuarioPresenter presenterTelaManterUsuario, String nomeUsuario) {
         super(presenterTelaManterUsuario, nomeUsuario);

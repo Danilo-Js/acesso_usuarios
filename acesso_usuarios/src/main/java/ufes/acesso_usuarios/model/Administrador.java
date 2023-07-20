@@ -55,7 +55,7 @@ public class Administrador extends Usuario{
     public void listarUsuarios() {
         usuariosCadastrados = usuarioRepository.getUsuarios();
         for (Usuario usuario : usuariosCadastrados) {
-            System.out.println("Nome: " + usuario.getUsuario());
+            System.out.println("Nome: " + usuario.getNomeUsuario());
             System.out.println("Data de Cadastro: " + usuario.getDataCadastro());
             System.out.println("Número de Notificações Enviadas: " + usuario.getQtdNotificacoesRecebidas());
             System.out.println("Número de Notificações Lidas: " + usuario.getQtdNotificacoesLidas());

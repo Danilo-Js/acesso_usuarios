@@ -12,6 +12,7 @@ public class TelaFormatoLogPresenter {
         this.telaConfiguracoesLogView = new TelaFormatoLogView();
         this.telaConfiguracoesLogView.setVisible(true);
         this.telaConfiguracoesLogView.setLocationRelativeTo(null);
+        this.telaConfiguracoesLogView.setResizable(false);
         listenerOpcaoFormatoLog();
     }
 
@@ -23,12 +24,12 @@ public class TelaFormatoLogPresenter {
                  String formatoLog = (String) telaConfiguracoesLogView.getSelectFormatoLog().getSelectedItem();
                 //--Salva o formato de LOG no banco
                 System.out.println("Log: " + formatoLog);
-                exibirMensagemDeSucesso("Formato de LOG salvo com sucesso.");
+                exibirMensagem("Formato de LOG salvo com sucesso.");
             }
         });
     }
     
-    private void exibirMensagemDeSucesso(String mensagem) {
+    public void exibirMensagem(String mensagem) {
         JOptionPane.showMessageDialog(telaConfiguracoesLogView, mensagem, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
         telaConfiguracoesLogView.dispose();
     }

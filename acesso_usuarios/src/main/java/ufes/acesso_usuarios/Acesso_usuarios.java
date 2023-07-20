@@ -48,7 +48,7 @@ public class Acesso_usuarios {
 //        // Visualização da notificação pelo usuário
 //        usuarioService.visualizarNotificacao(usuario.getUsuario());
 //        usuarioService.visualizarNotificacao(usuario.getUsuario());
-        new TelaFormatoLogPresenter();
-        //TelaLoginPresenter telaLogin = new TelaLoginPresenter();
+        //new TelaFormatoLogPresenter();
+        TelaLoginPresenter telaLogin = new TelaLoginPresenter();
     }
 }

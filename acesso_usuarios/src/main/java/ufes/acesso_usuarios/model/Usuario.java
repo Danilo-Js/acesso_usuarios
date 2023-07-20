@@ -1,23 +1,21 @@
 package ufes.acesso_usuarios.model;
-import ufes.acesso_usuarios.state.UsuarioState;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import ufes.acesso_usuarios.service.UsuarioService;
 
 public class Usuario {
     private String nome;
-    private String usuario;
+    private String nomeUsuario;
     private String senha;
     private LocalDate dataCadastro;
     private boolean autorizado;
     private ArrayList<Notificacao> notificacoes;
     private String tipo;
-    //protected UsuarioState estado;
     private UsuarioService usuarioService;
 
     public Usuario(String nome, String usuario, String senha) {
         this.nome = nome;
-        this.usuario = usuario;
+        this.nomeUsuario = usuario;
         this.senha = senha;
         this.dataCadastro = LocalDate.now();
         this.autorizado = false;
@@ -67,12 +65,12 @@ public class Usuario {
         this.nome = nome;
     }
     
-    public String getUsuario() {
-        return usuario;
+    public String getNomeUsuario() {
+        return nomeUsuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
     }
 
     public String getSenha() {
@@ -117,7 +115,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "nome=" + nome + ",usuario=" + usuario + ", senha=" + senha + ", dataCadastro=" + dataCadastro + ", autorizado=" + autorizado + ", notificacoes=" + notificacoes + ", tipo=" + tipo /*+ ", estado=" + estado*/ + ", usuarioService=" + usuarioService + '}';
+        return "Usuario{" + "nome=" + nome + ",usuario=" + nomeUsuario + ", senha=" + senha + ", dataCadastro=" + dataCadastro + ", autorizado=" + autorizado + ", notificacoes=" + notificacoes + ", tipo=" + tipo /*+ ", estado=" + estado*/ + ", usuarioService=" + usuarioService + '}';
     }
     
 }

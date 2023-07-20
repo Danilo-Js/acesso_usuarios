@@ -12,9 +12,9 @@ public class TelaPrincipalAdminPresenter {
     private TelaLoginPresenter presenterTelaLogin;
     private TelaManterUsuarioPresenter presenterTelaManterUsuario;
     private Usuario usuario;
-    private UsuarioState estado;
+    private State estado;
 
-    private TelaPrincipalAdminPresenter(Usuario usuario) {
+    TelaPrincipalAdminPresenter(Usuario usuario) {
         this.telaPrincipalAdmin = new TelaPrincipalAdminView();
         this.telaPrincipalAdmin.setVisible(true);
         this.telaPrincipalAdmin.setLocationRelativeTo(null);
@@ -32,7 +32,7 @@ public class TelaPrincipalAdminPresenter {
     }
 
     public void preencherRodape() {
-        telaPrincipalAdmin.getTxtNomeUsuario().setText(usuario.getUsuario());
+        telaPrincipalAdmin.getTxtNomeUsuario().setText(usuario.getNomeUsuario());
         telaPrincipalAdmin.getTxtTipoUsuario().setText(usuario.getTipo());
         telaPrincipalAdmin.getTxtQtdNotificacoes().setText(String.valueOf(usuario.getQtdNotificacoesRecebidas()));
     }
@@ -102,7 +102,7 @@ public class TelaPrincipalAdminPresenter {
         
     }
 
-    public void alterarEstado(UsuarioState estado) {
+    public void alterarEstado(State estado) {
         this.estado = estado;
     }
 
