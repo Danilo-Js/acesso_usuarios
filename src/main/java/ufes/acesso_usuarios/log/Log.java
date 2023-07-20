@@ -17,8 +17,8 @@ public class Log {
     }
     
     public void setLog(String configuracao) {
-        if (configuracao.equals("XML")) {
-            this.log = new XMLAdapter();
+        if (configuracao.equals("CSV")) {
+            this.log = new CSVAdapter();
         } else {
             this.log = new JSONAdapter();
         }
