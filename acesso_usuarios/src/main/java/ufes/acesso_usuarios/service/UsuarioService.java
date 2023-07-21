@@ -1,5 +1,6 @@
 package ufes.acesso_usuarios.service;
 import java.util.ArrayList;
+import ufes.acesso_usuarios.dao.UserDAO;
 import ufes.acesso_usuarios.model.Notificacao;
 import ufes.acesso_usuarios.model.Usuario;
 import ufes.acesso_usuarios.observer.Observado;
@@ -10,13 +11,14 @@ public class UsuarioService extends Observado{
     private static UsuarioService instance;
     private NotificacaoService notificacaoService;
     private UsuarioRepository usuarioRepository;
+    
     private ArrayList<Usuario> usuarios;
     private Usuario usuario;
 
     private UsuarioService() {
         this.notificacaoService = NotificacaoService.getInstance();
         this.usuarioRepository = UsuarioRepository.getInstance();
-        this.usuarios = new ArrayList();
+        this.usuarios = new UserDAO().getUsers();
     }
 
     public static UsuarioService getInstance() {

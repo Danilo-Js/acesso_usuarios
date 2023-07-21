@@ -24,9 +24,8 @@ public class NotificacaoService {
     
     private void enviarNotificacao(String remetente, ArrayList<String> destinatarios, String mensagem) {
         for (String destinatario : destinatarios) {
-            Notificacao notificacao = new Notificacao(remetente, destinatario, mensagem);
+            this.enviarNotificacao(remetente, destinatario, mensagem);
         }
-        return instance;
     }
     
     public void enviarNotificacao(String remetente, String destinatario, String mensagem) {
