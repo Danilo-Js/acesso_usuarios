@@ -15,13 +15,13 @@ import ufes.acesso_usuarios.model.Usuario;
  */
 public class UserDAO {
     private Connection connection;
-    private NotificationDAO notificationDAO;
+    //private NotificationDAO notificationDAO;
     
     public UserDAO() {
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection("jdbc:sqlite:database.db");
-            notificationDAO = new NotificationDAO();
+            //notificationDAO = new NotificationDAO();
             initialize();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -88,7 +88,7 @@ public class UserDAO {
                 user.setDataCadastro(LocalDate.parse(resultSet.getString("dataCadastro")));
                 user.setAutorizado(resultSet.getInt("autorizado") == 1);
                 user.setTipo(resultSet.getString("tipo"));
-                user.setNotificacoes(notificationDAO.getNotificationsByUser(resultSet.getString("nome"), resultSet.getString("senha")));
+                //user.setNotificacoes(notificationDAO.getNotificationsByUser(resultSet.getString("nome"), resultSet.getString("senha")));
                 users.add(user);
             }
         } catch (SQLException e) {

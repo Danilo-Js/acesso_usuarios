@@ -32,7 +32,8 @@ public class TelaManterUsuarioPresenter implements Observer{
     public void validarOpcao(String opcao) {
         if (opcao.equals("verUsuario")) {
             alterarEstado(new VisualizacaoState(this, usuario.getNomeUsuario()));
-            preencherDadosVerUsuario();
+            //preencherDadosVerUsuario();
+            atualizar();
             // Botão Fechar
             this.telaManterUsuario.getBtnCriar().setText("Fechar");
             this.telaManterUsuario.getBtnCriar().removeActionListener(null); // Remove os ActionListeners anteriores
@@ -175,7 +176,7 @@ public class TelaManterUsuarioPresenter implements Observer{
     
     @Override
     public void atualizar() {
-        validarOpcao(null);
+        preencherDadosVerUsuario();
     }
 
 }

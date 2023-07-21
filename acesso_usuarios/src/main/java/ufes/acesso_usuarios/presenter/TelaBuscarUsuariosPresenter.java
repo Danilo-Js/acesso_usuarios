@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import ufes.acesso_usuarios.model.Notificacao;
 import ufes.acesso_usuarios.model.Usuario;
 import ufes.acesso_usuarios.observer.Observer;
-import ufes.acesso_usuarios.service.NotificacaoService;
 import ufes.acesso_usuarios.service.UsuarioService;
 import ufes.acesso_usuarios.state.InclusaoState;
 import ufes.acesso_usuarios.state.State;
@@ -19,7 +19,6 @@ public class TelaBuscarUsuariosPresenter implements Observer {
     private TelaBuscarUsuariosView telaBuscarUsuariosView;
     private TelaManterUsuarioPresenter presenterTelaManterUsuario;
     private UsuarioService usuarioService;
-    private NotificacaoService notificacaoService;
     private ArrayList<Usuario> usuarios;
     private Usuario admin;
     private Usuario usuario;
@@ -29,7 +28,6 @@ public class TelaBuscarUsuariosPresenter implements Observer {
     public TelaBuscarUsuariosPresenter(Usuario admin) {
         this.usuarioService = UsuarioService.getInstance();
         this.usuarioService.adicionarObservador(this);
-        this.notificacaoService = NotificacaoService.getInstance();
         this.telaBuscarUsuariosView = new TelaBuscarUsuariosView();
         this.telaBuscarUsuariosView.setVisible(true);
         this.telaBuscarUsuariosView.setLocationRelativeTo(null);
@@ -37,7 +35,8 @@ public class TelaBuscarUsuariosPresenter implements Observer {
         this.usuarios = new ArrayList();
         this.admin = admin;
         preencherRodape();
-        preencherTabela();
+        //preencherTabela();
+        atualizar();
         //Listeners dos Botões
         listenersBotoes();
     }
@@ -183,9 +182,11 @@ public class TelaBuscarUsuariosPresenter implements Observer {
                 int indiceLinhaSelecionada = tableUsuarios.getSelectedRow();
                 if (indiceLinhaSelecionada != -1) {
                     String nomeUsuario = (String) tableUsuarios.getValueAt(indiceLinhaSelecionada, 1);
-                    notificacaoService.enviarNotificacao(admin.getNomeUsuario(), nomeUsuario, "Seja Bem-vindo ao nosso sistema!");
+                    usuario = usuarioService.buscarUsuario(nomeUsuario);
+                    usuario.addNotificacao(new Notificacao(admin.getNomeUsuario(), usuario.getNomeUsuario(), "Seja bem-vindo ao sistema."));
                     usuarioService.atualizarUsuario(usuario);
                     exibirMensagem("Notificação enviada.");
+                    atualizar();
                 } else {
                     exibirMensagem("Selecione um usuário para notificar.");
                 }
