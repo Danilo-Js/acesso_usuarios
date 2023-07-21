@@ -186,6 +186,7 @@ public class TelaBuscarUsuariosPresenter implements Observer {
                     usuario.addNotificacao(new Notificacao(admin.getNomeUsuario(), usuario.getNomeUsuario(), "Seja bem-vindo ao sistema."));
                     usuarioService.atualizarUsuario(usuario);
                     exibirMensagem("Notificação enviada.");
+                    atualizar();
                 } else {
                     exibirMensagem("Selecione um usuário para notificar.");
                 }
