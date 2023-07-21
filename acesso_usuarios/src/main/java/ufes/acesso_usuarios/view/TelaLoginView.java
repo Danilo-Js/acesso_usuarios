@@ -66,6 +66,11 @@ public class TelaLoginView extends javax.swing.JFrame {
 
         btnCriarConta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCriarConta.setText("Criar conta");
+        btnCriarConta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCriarContaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,6 +120,10 @@ public class TelaLoginView extends javax.swing.JFrame {
     private void inputUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inputUsuarioActionPerformed
+
+    private void btnCriarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarContaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCriarContaActionPerformed
 
     //GETS
     public JTextField getInputSenha() {

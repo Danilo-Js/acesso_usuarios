@@ -7,8 +7,8 @@ import ufes.acesso_usuarios.repository.NotificacaoRepository;
 public class NotificacaoService {
     private static NotificacaoService instance;
     private Notificacao notificacao;
-    private NotificacaoRepository notificacaoRepository ;
-    private UsuarioService usuarioService;
+    private final NotificacaoRepository notificacaoRepository ;
+    private final UsuarioService usuarioService;
 
     public NotificacaoService() {
         this.notificacaoRepository = NotificacaoRepository.getInstance();
@@ -22,7 +22,7 @@ public class NotificacaoService {
         return instance;
     }
     
-    private void enviarNotificacao(String remetente, ArrayList<String> destinatarios, String mensagem) {
+    private void enviarNotificacoes(String remetente, ArrayList<String> destinatarios, String mensagem) {
         for (String destinatario : destinatarios) {
             this.enviarNotificacao(remetente, destinatario, mensagem);
         }

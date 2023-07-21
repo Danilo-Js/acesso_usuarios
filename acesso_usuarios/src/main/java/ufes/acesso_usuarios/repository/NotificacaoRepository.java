@@ -1,7 +1,9 @@
 package ufes.acesso_usuarios.repository;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import ufes.acesso_usuarios.dao.NotificationDAO;
-import ufes.acesso_usuarios.log.Log;
+import ufes.acesso_usuarios.adapter.Log;
 import ufes.acesso_usuarios.model.Notificacao;
 
 public class NotificacaoRepository {
@@ -15,7 +17,7 @@ public class NotificacaoRepository {
     private NotificacaoRepository() {
         this.notificationDAO = new NotificationDAO();
         this.notificacoes = this.notificationDAO.getNotifications();
-        this.log = new Log("CSV");
+        this.log = new Log();
     }
     
     public static NotificacaoRepository getInstance() {
@@ -29,6 +31,7 @@ public class NotificacaoRepository {
         notificacao = new Notificacao(remetente, destinatario, mensagem);
         this.notificationDAO.addNotification(new Notificacao(remetente,destinatario,mensagem));
         this.notificacoes.add(notificacao);
+        log.getLog().criaLog_Sucesso("Envio de notificação", remetente, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")), destinatario);
     }
 
     public ArrayList<Notificacao> getNotificacoes() {
@@ -41,10 +44,11 @@ public class NotificacaoRepository {
             if (notificacao.getId() == notificacaoLida.getId()) {
                 notificacoes.set(i, notificacaoLida);
                 this.notificationDAO.updateNotification(notificacao);
+                log.getLog().criaLog_Sucesso("Leitura de notificação", notificacaoLida.getRemetente(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")), notificacaoLida.getDestinatario());
                 return;
             }
         }
-        System.out.println("Notificação não encontrada.");
+        this.log.getLog().criaLog_Falha("Notificação não encontrada", "Leitura de notificação", notificacaoLida.getRemetente(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")), notificacaoLida.getDestinatario());
     }
 
     public Notificacao buscarNotificacao(int id) {

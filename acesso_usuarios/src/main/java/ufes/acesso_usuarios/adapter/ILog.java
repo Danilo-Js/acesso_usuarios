@@ -1,4 +1,4 @@
-package ufes.acesso_usuarios.log;
+package ufes.acesso_usuarios.adapter;
 
 /**
  *

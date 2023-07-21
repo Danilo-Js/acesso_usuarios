@@ -9,8 +9,8 @@ import ufes.acesso_usuarios.repository.UsuarioRepository;
 public class UsuarioService extends Observado{
 
     private static UsuarioService instance;
-    private NotificacaoService notificacaoService;
-    private UsuarioRepository usuarioRepository;
+    private final NotificacaoService notificacaoService;
+    private final UsuarioRepository usuarioRepository;
     
     private ArrayList<Usuario> usuarios;
     private Usuario usuario;

@@ -1,4 +1,4 @@
-package ufes.acesso_usuarios.log;
+package ufes.acesso_usuarios.adapter;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

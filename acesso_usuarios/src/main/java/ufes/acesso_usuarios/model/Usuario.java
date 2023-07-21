@@ -113,14 +113,6 @@ public class Usuario {
         this.notificacoes = notificacoes;
     }
 
-//    public void setEstado(UsuarioState estado) {
-//        this.estado = estado;
-//    }
-//    
-//    public UsuarioState getEstado() {
-//        return estado;
-//    }
-
     public String getTipo() {
         return tipo;
     }
