@@ -15,12 +15,16 @@ public class UsuarioRepository {
     
     private UsuarioRepository() {
         this.usuarios = new ArrayList<>();
-        Usuario admin = new Usuario("Gabriel", "gabriel", "123");
+        this.userDAO = new UserDAO();
+        this.log = new Log();
+        Usuario admin = new Usuario("Administrador", "admin", "123");
         admin.setAutorizado(true);
         admin.setTipo("admin");
         this.usuarios.add(admin);
-        this.userDAO = new UserDAO();
-        this.log = new Log();
+        Usuario usuario = new Usuario("Usuário", "user", "123");
+        usuario.setAutorizado(true);
+        usuario.setTipo("comum");
+        this.usuarios.add(usuario);
     }
 
     public static UsuarioRepository getInstance() {

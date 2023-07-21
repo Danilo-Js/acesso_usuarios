@@ -9,14 +9,14 @@ import ufes.acesso_usuarios.repository.UsuarioRepository;
 public class UsuarioService extends Observado{
 
     private static UsuarioService instance;
-    private final NotificacaoService notificacaoService;
+    //private final NotificacaoService notificacaoService;
     private final UsuarioRepository usuarioRepository;
     
     private ArrayList<Usuario> usuarios;
     private Usuario usuario;
 
     private UsuarioService() {
-        this.notificacaoService = NotificacaoService.getInstance();
+        //this.notificacaoService = NotificacaoService.getInstance();
         this.usuarioRepository = UsuarioRepository.getInstance();
         this.usuarios = new UserDAO().getUsers();
     }
@@ -80,7 +80,6 @@ public class UsuarioService extends Observado{
 
     public ArrayList getUsuarios() {
         this.usuarios = this.usuarioRepository.getUsuarios();
-        notificarObservadores();
         return this.usuarios;
     }
 

@@ -55,6 +55,7 @@ public class TelaLoginPresenter {
         this.telaLogin.getBtnCriarConta().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                telaLogin.dispose();
                 presenterTelaManterUsuario = new TelaManterUsuarioPresenter(null, "criarUsuario");
             }
         });
